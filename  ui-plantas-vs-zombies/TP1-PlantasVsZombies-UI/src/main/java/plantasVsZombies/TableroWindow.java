@@ -1,11 +1,14 @@
 package plantasVsZombies;
 
 
+import java.awt.Color;
+
 import org.uqbar.arena.actions.MessageSend;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
@@ -39,10 +42,15 @@ public class TableroWindow extends SimpleWindow<Tablero> {
 		Panel actionsPanel = new Panel(mainPanel);
 		actionsPanel.setLayout(new HorizontalLayout());
 
+		Button zen = new Button(actionsPanel);
+		zen.setCaption("Ir al Jardin Zen");
+		zen.onClick(new MessageSend(this, "irAlJardinZen"));
+		
 		Button edit = new Button(actionsPanel);
 		edit.setCaption("Almanaque de zombies");
 		edit.onClick(new MessageSend(this, "almanaqueDeZombies"));
-
+		
+		new Label(actionsPanel).setText("Estado").setForeground(Color.BLACK);
 	}
 
 	@Override
@@ -60,6 +68,10 @@ public class TableroWindow extends SimpleWindow<Tablero> {
 		this.openDialog(new AlmanaqueZombieWindow(this));
 	}
 
+	public void irAlJardinZen() {
+		this.openDialog(new JardinZenWindow(this));
+	}
+	
 	protected void openDialog(Dialog<?> dialog) {
 		dialog.onAccept(new MessageSend(this.getModelObject(), "search"));
 		dialog.open();
