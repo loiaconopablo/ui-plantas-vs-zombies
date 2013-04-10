@@ -1,6 +1,9 @@
 package plantasVsZombies;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
 
 import plantaszombies.AlmanaqueDeZombies;
 import plantaszombies.Zombie;
@@ -9,13 +12,13 @@ public class AlmanaqueZombie {
 	
 	private String nombre;
 	private Zombie zombieSeleccionado;
-	private Zombie resultado;
-	private AlmanaqueDeZombies almanaqueDeZombies;
+	private List<Zombie> resultados;
+	private AlmanaqueDeZombies almanaqueDeZombies = new AlmanaqueDeZombies();
 	
 	/**
 	 * Getters y setters
 	 */
-	
+
 	public Zombie getZombieSeleccionado() {
 				return zombieSeleccionado;
 	}
@@ -28,15 +31,25 @@ public class AlmanaqueZombie {
 	public void setZombieSeleccionado(Zombie zombieSeleccionado) {
 		this.zombieSeleccionado = zombieSeleccionado;
 	}
-	public Zombie getResultados() {
-		return resultado;
+	public List<Zombie> getResultados() {
+		return resultados;
 	}
-	public void setResultados(Zombie resultado) {
-		this.resultado = resultado;
+	public void setResultados(List<Zombie> resultado) {
+		this.resultados = resultado;
 	}
 	
-	public void buscar(){
-		this.resultado = this.almanaqueDeZombies.buscar(this.nombre);
+	/**
+	 * Acciones
+	 */
+	
+	public void clear(){
+		this.nombre = "";
 	}
+	public void buscar(){
+		this.resultados = this.almanaqueDeZombies.search(this.nombre);
+	}
+	
+
+	
 
 }

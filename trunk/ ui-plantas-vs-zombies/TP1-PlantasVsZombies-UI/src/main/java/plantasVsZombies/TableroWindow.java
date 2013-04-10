@@ -10,6 +10,7 @@ import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
@@ -46,11 +47,12 @@ public class TableroWindow extends SimpleWindow<Tablero> {
 		zen.setCaption("Ir al Jardin Zen");
 		zen.onClick(new MessageSend(this, "irAlJardinZen"));
 		
-		Button edit = new Button(actionsPanel);
-		edit.setCaption("Almanaque de zombies");
-		edit.onClick(new MessageSend(this, "almanaqueDeZombies"));
+		Button almanaque = new Button(actionsPanel);
+		almanaque.setCaption("Almanaque de zombies");
+		almanaque.onClick(new MessageSend(this, "almanaqueDeZombies"));
 		
-		new Label(actionsPanel).setText("Estado").setForeground(Color.BLACK);
+		new Label(actionsPanel).setText("Recursos").setForeground(Color.BLACK);
+		new Label(actionsPanel).bindValueToProperty("jardin.recursos");
 	}
 
 	@Override

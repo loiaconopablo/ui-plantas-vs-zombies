@@ -34,6 +34,11 @@ public class AlmanaqueZombieWindow extends TransactionalDialog<AlmanaqueZombie> 
 		.onClick(new MessageSend(this.getModelObject(), "buscar"));
 		//.setAsDefault()
 		//.disableOnError();
+		
+		new Button(panel)
+		.setCaption("Limpiar")
+		.onClick(new MessageSend(this.getModelObject(), "clear"));
+		
 	}
 	
 	@Override
@@ -43,7 +48,7 @@ public class AlmanaqueZombieWindow extends TransactionalDialog<AlmanaqueZombie> 
 
 		super.createMainTemplate(mainPanel);
 
-		//this.createResultsGrid(mainPanel);
+		this.createResultsGrid(mainPanel);
 	}
 	
 
@@ -53,13 +58,13 @@ public class AlmanaqueZombieWindow extends TransactionalDialog<AlmanaqueZombie> 
 		table.setWidth(450);
 
 		table.bindItemsToProperty("resultados");
-		table.bindValueToProperty("celularSeleccionado");
+		table.bindValueToProperty("zombieSeleccionado");
 
 		this.describeResultsGrid(table);		
 	}
 	
 	protected void describeResultsGrid(Table<Zombie> table) {
-		new Column<Zombie>(table) //
+		new Column<Zombie>(table) 
 			.setTitle("Nombre")
 			.setFixedSize(150)
 			.bindContentsToProperty("nombre");
@@ -70,6 +75,9 @@ public class AlmanaqueZombieWindow extends TransactionalDialog<AlmanaqueZombie> 
 	protected void createFormPanel(Panel mainPanel) {
 		Panel searchFormPanel = new Panel(mainPanel);
 		searchFormPanel.setLayout(new ColumnLayout(2));
+		
+		new Label(searchFormPanel).setText("Nombre del zombie").setForeground(Color.BLUE);
+		new TextBox(searchFormPanel).bindValueToProperty("nombre");
 
 	}
 
