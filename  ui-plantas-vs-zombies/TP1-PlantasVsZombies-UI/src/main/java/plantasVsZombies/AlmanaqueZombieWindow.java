@@ -17,6 +17,7 @@ import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.Window;
 import org.uqbar.arena.windows.WindowOwner;
 
+
 import plantaszombies.Zombie;
 
 
@@ -68,6 +69,13 @@ public class AlmanaqueZombieWindow extends TransactionalDialog<AlmanaqueZombie> 
 			.setTitle("Nombre")
 			.setFixedSize(150)
 			.bindContentsToProperty("nombre");
+		
+	Column<Zombie> modeloColumn = new Column<Zombie>(table);
+	modeloColumn.setTitle("Ataque");
+	modeloColumn.setFixedSize(150);
+	modeloColumn.bindContentsToProperty("ataque");
+
+				
 
 	}
 
