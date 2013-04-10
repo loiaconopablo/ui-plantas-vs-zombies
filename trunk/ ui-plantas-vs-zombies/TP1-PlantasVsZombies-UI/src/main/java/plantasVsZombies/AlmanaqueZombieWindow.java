@@ -25,7 +25,7 @@ public class AlmanaqueZombieWindow extends TransactionalDialog<AlmanaqueZombie> 
 
 	public AlmanaqueZombieWindow(WindowOwner parent) {
 		super(parent,new AlmanaqueZombie());
-		
+		this.getModelObject().buscar();
 	}
 
 	@Override
