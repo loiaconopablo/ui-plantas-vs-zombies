@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
+
 
 import plantaszombies.AlmanaqueDeZombies;
 import plantaszombies.Zombie;
 
+@Observable
 public class AlmanaqueZombie {
 	
 	private String nombre;
@@ -45,6 +48,7 @@ public class AlmanaqueZombie {
 	
 	public void clear(){
 		this.nombre = "";
+		this.buscar();
 	}
 	public void buscar(){
 		this.resultados = this.almanaqueDeZombies.search(this.nombre);
