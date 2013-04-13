@@ -11,7 +11,7 @@ public class PlantasVsZombiesApplication extends Application {
 	
 	@Override
 	protected Window<?> createMainWindow() {
-		return new TableroWindow(this);
+		return new InicioWindow(this);
 	}
 
 }
