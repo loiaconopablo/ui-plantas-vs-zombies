@@ -6,7 +6,9 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 
 import plantaszombies.Jardin;
+import plantaszombies.Planta;
 import plantaszombies.Terreno;
+import plantaszombies.TipoTerrenoAcuatico;
 
 
 @SuppressWarnings("serial")
@@ -61,6 +63,8 @@ public class Tablero implements Serializable{
 	 */
 	
 	public void jugar(){
+//		Jardin jardin = new Jardin(this.getFilasTerrestres(),this.getFilasAcuaticas());
+//		jardin.getFilas().get(1).getPlantas().add(0, new Planta(50,50,"planta", new Terreno(new TipoTerrenoAcuatico())));
 		this.setJardin(new Jardin(this.getFilasTerrestres(),this.getFilasAcuaticas()));
 	}
 }
