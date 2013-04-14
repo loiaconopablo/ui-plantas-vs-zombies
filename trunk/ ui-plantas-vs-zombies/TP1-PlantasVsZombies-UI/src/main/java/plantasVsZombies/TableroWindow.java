@@ -7,6 +7,7 @@ import org.uqbar.arena.aop.windows.TransactionalDialog;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
+import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -28,7 +29,6 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	@Override
 	protected void addActions(Panel actionsPanel) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -48,6 +48,26 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 		jardinPanel.setLayout(new HorizontalLayout());
 
 		this.createResultsGrid(jardinPanel);
+		
+		Panel panelDeSiembra = new Panel(mainPanel);
+		panelDeSiembra.setLayout(new HorizontalLayout());
+		
+		new Label(panelDeSiembra).setText("Plantas").setForeground(Color.BLUE);
+		
+		this.crearGrillaDeSiembra(panelDeSiembra);
+		
+	}
+
+	private void crearGrillaDeSiembra(Panel panelDeSiembra) {
+		Panel panel = new Panel(panelDeSiembra);
+		panelDeSiembra.setLayout(new HorizontalLayout());
+		
+		new Label(panel).setText("Planta:").setForeground(Color.GREEN);
+		
+		new Label(panel).setText("Fila:").setForeground(Color.GREEN);
+		
+		new Label(panel).setText("Columna:").setForeground(Color.GREEN);
+		
 	}
 
 	private void createResultsGrid(Panel mainPanel) {
@@ -62,18 +82,16 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	protected void describeResultsGrid(Table<Planta> table) {
 
-		for (Terreno terreno : this.getModelObject().getFilas()) {
-			new Column<Planta>(table).setTitle("0").setFixedSize(150)
-					.bindContentsToProperty("nombre");
-			new Column<Planta>(table).setTitle("1").setFixedSize(150)
-					.bindContentsToProperty("nombre");
-			new Column<Planta>(table).setTitle("2").setFixedSize(150)
-					.bindContentsToProperty("nombre");
-			new Column<Planta>(table).setTitle("3").setFixedSize(150)
-					.bindContentsToProperty("nombre");
-			new Column<Planta>(table).setTitle("4").setFixedSize(150)
-					.bindContentsToProperty("nombre");
-		}
+		new Column<Planta>(table).setTitle("0").setFixedSize(150)
+				.bindContentsToProperty("nombre");
+		new Column<Planta>(table).setTitle("1").setFixedSize(150)
+				.bindContentsToProperty("nombre");
+		new Column<Planta>(table).setTitle("2").setFixedSize(150)
+				.bindContentsToProperty("nombre");
+		new Column<Planta>(table).setTitle("3").setFixedSize(150)
+				.bindContentsToProperty("nombre");
+		new Column<Planta>(table).setTitle("4").setFixedSize(150)
+				.bindContentsToProperty("nombre");
 
 	}
 
@@ -91,13 +109,13 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 		new Label(actionsPanel).setText("Recursos").setForeground(Color.BLACK);
 		new Label(actionsPanel).bindValueToProperty("jardin.recursos");
+		
 	}
 
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		Panel searchFormPanel = new Panel(mainPanel);
 		searchFormPanel.setLayout(new ColumnLayout(2));
-
 	}
 
 	/**
@@ -115,7 +133,6 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 	protected void openDialog(Dialog<?> dialog) {
 		dialog.onAccept(new MessageSend(this.getModelObject(), "search"));
 		dialog.open();
-
 	}
 
 }
