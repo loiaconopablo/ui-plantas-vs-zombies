@@ -60,7 +60,7 @@ public class InicioWindow extends SimpleWindow<Tablero> {
 	}
 	
 	protected void openDialog(Dialog<?> dialog) {
-		//dialog.onAccept(new MessageSend(this.getModelObject(),"jugar"));
+		dialog.onAccept(new MessageSend(this.getModelObject(),"jugar"));
 		dialog.open();
 		
 	}
