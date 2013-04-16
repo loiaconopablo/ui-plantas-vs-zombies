@@ -6,6 +6,7 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
+import plantaszombies.AlmanaqueDeZombies;
 import plantaszombies.Jardin;
 import plantaszombies.JardinZen;
 import plantaszombies.Partida;
@@ -29,9 +30,17 @@ public class Tablero implements Serializable{
 	private Zombie zombieAtacante;
 	private int filaAAtacar;
 	private Partida partida;
+	private AlmanaqueDeZombies almanaque;
+	
+	
+	
+	public Tablero(){
+		this.jardin.getFilas().get(0).aniadirEn(new Semilla(new TipoTerrenoAcuatico(),"Girasol",50,50), 0);
+	}
 	/**
 	 * Accesors
 	 */
+	
 	public Zombie getZombieAtacante() {
 		return zombieAtacante;
 	}
@@ -39,7 +48,15 @@ public class Tablero implements Serializable{
 	public void setZombieAtacante(Zombie zombieAtacante) {
 		this.zombieAtacante = zombieAtacante;
 	}
-
+	
+	public List<Zombie> getAlmanaque() {
+		return almanaque.getZombies();
+	}
+	
+	public void setAlmanaque(AlmanaqueDeZombies almanaque) {
+		this.almanaque = almanaque;
+	}
+	
 	public int getFilaAAtacar() {
 		return filaAAtacar;
 	}
