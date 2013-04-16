@@ -19,8 +19,10 @@ import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
+import org.uqbar.lacar.ui.model.ListBuilder;
+import org.uqbar.lacar.ui.model.bindings.Binding;
 
-
+import plantaszombies.Jardin;
 import plantaszombies.Planta;
 import plantaszombies.Semilla;
 import plantaszombies.Terreno;
@@ -54,36 +56,44 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 		jardinPanel.setLayout(new HorizontalLayout());
 
 		this.createResultsGrid(jardinPanel);
-		
+
 		this.crearPanelDeZombie(jardinPanel);
-		
+
 		Panel panelDeSiembra = new Panel(mainPanel);
 		panelDeSiembra.setLayout(new VerticalLayout());
-		
+
 		new Label(panelDeSiembra).setText("Plantas").setForeground(Color.BLUE);
-		
+
 		this.crearGrillaDeSiembra(panelDeSiembra);
-		
+
 	}
 
 	private void crearPanelDeZombie(Panel jardinPanel) {
 		Panel panelZombie = new Panel(jardinPanel);
 		panelZombie.setLayout(new VerticalLayout());
-		
+
 		Panel panelTitulo = new Panel(panelZombie);
 		panelTitulo.setLayout(new HorizontalLayout());
-		
+
 		new Label(panelTitulo).setText("ZOMBIS").setForeground(Color.RED);
-		new Label(panelTitulo).setText("Elige el zombie y la fila").setForeground(Color.BLACK).setFontSize(10);
-		
+		new Label(panelTitulo).setText("Elige el zombie y la fila")
+				.setForeground(Color.BLACK).setFontSize(10);
+
 		new Label(panelZombie).setText("Zombie: ").setForeground(Color.BLACK);
 		Selector<Zombie> selector = new Selector<Zombie>(panelZombie) //
 				.allowNull(false);
-			selector.bindValueToProperty("zombieAtacante");
-		
+		selector.bindValueToProperty("zombieAtacante");
+
+//		Binding<ListBuilder<Zombie>> itemsBinding = selector.bindItems( //
+//				new ObservableProperty(this.getModelObject(),
+//						"almanaque"));
+//
+//		itemsBinding.setAdapter( //
+//				new PropertyAdapter(Zombie.class, "nombre"));
+
 		new Label(panelZombie).setText("Fila:").setForeground(Color.GREEN);
-		new TextBox(panelZombie).setFontSize(5).bindValueToProperty("filaAAtacar");
-	
+		new TextBox(panelZombie).bindValueToProperty("filaAAtacar");
+
 		Button atacar = new Button(panelZombie);
 		atacar.setCaption("Atacar");
 		atacar.onClick(new MessageSend(this.getModelObject(), "atacar"));
@@ -92,24 +102,24 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 	private void crearGrillaDeSiembra(Panel panelDeSiembra) {
 		Panel panel = new Panel(panelDeSiembra);
 		panel.setLayout(new HorizontalLayout());
-		
+
 		new Label(panel).setText("Planta:").setForeground(Color.GREEN);
 		Selector<Semilla> selector = new Selector<Semilla>(panel) //
 				.allowNull(false);
-			selector.bindValueToProperty("semilla");
+		selector.bindValueToProperty("semilla");
 
-		
 		new Label(panel).setText("Fila:").setForeground(Color.GREEN);
 		new TextBox(panel).bindValueToProperty("fila");
-		
+
 		new Label(panel).setText("Columna:").setForeground(Color.GREEN);
 		new TextBox(panel).bindValueToProperty("columna");
-		
-//			Binding<ListBuilder<Planta>> itemsBinding = selector.bindItems( //
-//				new ObservableProperty(RepositorioModelos.getInstance(), "modelos"));
-//
-//			itemsBinding.setAdapter( //
-//				new PropertyAdapter(Planta.class, "descripcionEntera"));
+
+		// Binding<ListBuilder<Semilla>> itemsBinding = selector.bindItems( //
+		// new ObservableProperty(RepositorioModelos.getInstance(),
+		// "modelos"));
+		//
+		// itemsBinding.setAdapter( //
+		// new PropertyAdapter(Planta.class, "descripcionEntera"));
 
 		Button plantar = new Button(panel);
 		plantar.setCaption("Plantar");
@@ -117,27 +127,29 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 	}
 
 	private void createResultsGrid(Panel mainPanel) {
-		Table<Planta> table = new Table<Planta>(mainPanel, Planta.class);
+		Table<Terreno> table = new Table<Terreno>(mainPanel, Terreno.class);
 		table.setHeigth(200);
-		table.setWidth(450);
+		table.setWidth(500);
 
 		table.bindItemsToProperty("filas");
 
-		//this.describeResultsGrid(table);
+		this.describeResultsGrid(table);
 	}
 
-	protected void describeResultsGrid(Table<Planta> table) {
+	protected void describeResultsGrid(Table<Terreno> table) {
 
-		new Column<Planta>(table).setTitle("0").setFixedSize(150)
-				.bindContentsToProperty("nombre");
-		new Column<Planta>(table).setTitle("1").setFixedSize(150)
-				.bindContentsToProperty("nombre");
-		new Column<Planta>(table).setTitle("2").setFixedSize(150)
-				.bindContentsToProperty("nombre");
-		new Column<Planta>(table).setTitle("3").setFixedSize(150)
-				.bindContentsToProperty("nombre");
-		new Column<Planta>(table).setTitle("4").setFixedSize(150)
-				.bindContentsToProperty("nombre");
+		new Column<Terreno>(table).setTitle("Tipo").setFixedSize(150)
+				.bindContentsToProperty("tipoTerrenoToString");
+		new Column<Terreno>(table).setTitle("1").setFixedSize(150)
+				.bindContentsToProperty("primero");
+		new Column<Terreno>(table).setTitle("2").setFixedSize(150)
+				.bindContentsToProperty("segundo");
+		new Column<Terreno>(table).setTitle("3").setFixedSize(150)
+				.bindContentsToProperty("tercero");
+		new Column<Terreno>(table).setTitle("4").setFixedSize(150)
+				.bindContentsToProperty("cuarto");
+		new Column<Terreno>(table).setTitle("5").setFixedSize(150)
+				.bindContentsToProperty("quinto");
 
 	}
 
@@ -155,7 +167,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 		new Label(actionsPanel).setText("Recursos").setForeground(Color.BLACK);
 		new Label(actionsPanel).bindValueToProperty("jardin.recursos");
-		
+
 	}
 
 	@Override
@@ -167,8 +179,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 	/**
 	 * Acciones
 	 */
-	
-	
+
 	public void almanaqueDeZombies() {
 		this.openDialog(new AlmanaqueZombieWindow(this));
 	}
