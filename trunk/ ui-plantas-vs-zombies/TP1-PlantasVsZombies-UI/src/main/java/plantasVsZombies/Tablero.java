@@ -30,12 +30,12 @@ public class Tablero implements Serializable{
 	private Zombie zombieAtacante;
 	private int filaAAtacar;
 	private Partida partida;
-	private AlmanaqueDeZombies almanaque;
+	private AlmanaqueDeZombies almanaque = new AlmanaqueDeZombies();
 	
 	
 	
 	public Tablero(){
-		this.jardin.getFilas().get(0).aniadirEn(new Semilla(new TipoTerrenoAcuatico(),"Girasol",50,50), 0);
+		//this.jardin.getFilas().get(0).aniadirEn(new Semilla(new TipoTerrenoAcuatico(),"Girasol",50,50), 0);//es de prueba
 	}
 	/**
 	 * Accesors
@@ -152,7 +152,7 @@ public class Tablero implements Serializable{
 	}
 	
 	public void atacar(){
-		this.partida.setZombieAtacante(this.getZombieAtacante());
+		this.zombieAtacante=this.getZombieAtacante();
 		this.partida.setTerrenoAAtacar(this.jardin.getFilas().get(this.filaAAtacar));
 		this.partida.atacar();
 	}
