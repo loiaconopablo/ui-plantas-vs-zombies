@@ -84,12 +84,11 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 				.allowNull(false);
 		selector.bindValueToProperty("zombieAtacante");
 
-//		Binding<ListBuilder<Zombie>> itemsBinding = selector.bindItems( //
-//				new ObservableProperty(this.getModelObject(),
-//						"almanaque"));
-//
-//		itemsBinding.setAdapter( //
-//				new PropertyAdapter(Zombie.class, "nombre"));
+		Binding<ListBuilder<Zombie>> itemsBinding = selector.bindItems( //
+				new ObservableProperty(this.getModelObject(), "almanaque"));
+
+		itemsBinding.setAdapter( //
+				new PropertyAdapter(Zombie.class, "nombre"));
 
 		new Label(panelZombie).setText("Fila:").setForeground(Color.GREEN);
 		new TextBox(panelZombie).bindValueToProperty("filaAAtacar");
@@ -114,16 +113,17 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 		new Label(panel).setText("Columna:").setForeground(Color.GREEN);
 		new TextBox(panel).bindValueToProperty("columna");
 
-		// Binding<ListBuilder<Semilla>> itemsBinding = selector.bindItems( //
-		// new ObservableProperty(RepositorioModelos.getInstance(),
-		// "modelos"));
-		//
-		// itemsBinding.setAdapter( //
-		// new PropertyAdapter(Planta.class, "descripcionEntera"));
+//		Binding<ListBuilder<Semilla>> itemsBinding = selector.bindItems( //
+//				new ObservableProperty(RepositorioModelos.getInstance(),
+//						"modelos"));
+//
+//		itemsBinding.setAdapter( //
+//				new PropertyAdapter(Semilla.class, "nombre"));
 
 		Button plantar = new Button(panel);
 		plantar.setCaption("Plantar");
 		plantar.onClick(new MessageSend(this.getModelObject(), "plantar"));
+
 	}
 
 	private void createResultsGrid(Panel mainPanel) {
