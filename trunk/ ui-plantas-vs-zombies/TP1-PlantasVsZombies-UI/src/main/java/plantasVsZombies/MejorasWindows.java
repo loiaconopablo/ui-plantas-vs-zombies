@@ -24,6 +24,7 @@ import org.uqbar.lacar.ui.model.bindings.Binding;
 
 import plantaszombies.Jardin;
 import plantaszombies.Mejora;
+import plantaszombies.Semilla;
 import plantaszombies.Planta;
 import plantaszombies.Semilla;
 import plantaszombies.Terreno;
@@ -73,24 +74,24 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 		
 	}
 
-	private void createResultsGrid(Panel panelDeMejoras) {
-		Table<Mejora> table = new Table<Mejora>(panelDeMejoras, Mejora.class);
+	private void createResultsGrid(Panel mainPanel) {
+		Table<Mejora> table = new Table<Mejora>(mainPanel, Mejora.class);
 		table.setHeigth(200);
 		table.setWidth(450);
 
 		table.bindItemsToProperty("semillaSeleccionada.mejorasAplicadas");
-		// table.bindValueToProperty("semillaSeleccionada");
+	//	 table.bindValueToProperty("semillaSeleccionada");
 
 		this.describeResultsGrid(table);
 
 	}
 
-	private void createResultsGridTwo(Panel panelDeMejoras) {
-		Table<Mejora> table = new Table<Mejora>(panelDeMejoras, Mejora.class);
+	private void createResultsGridTwo(Panel mainPanel) {
+		Table<Mejora> table = new Table<Mejora>(mainPanel, Mejora.class);
 		table.setHeigth(200);
 		table.setWidth(450);
 
-		table.bindItemsToProperty("jardinZen.getMejorasPredefinidas");
+		table.bindItemsToProperty("jardinZen.mejorasPredefinidas");
 		// table.bindValueToProperty("semillaSeleccionada");
 
 		this.describeResultsGridTwo(table);
@@ -100,12 +101,7 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 	private void describeResultsGridTwo(Table<Mejora> table) {
 		new Column<Mejora>(table).setTitle("Nombre").setFixedSize(150)
 				.bindContentsToProperty("nombre");
-
-		Column<Mejora> namekColumn = new Column<Mejora>(table);
-		namekColumn.setTitle("Nombre");
-		namekColumn.setFixedSize(150);
-		namekColumn.bindContentsToProperty("nombre");
-
+	
 		Column<Mejora> defenseColumn = new Column<Mejora>(table);
 		defenseColumn.setTitle("Costo");
 		defenseColumn.setFixedSize(150);
@@ -116,11 +112,10 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 		new Column<Mejora>(table).setTitle("Nombre").setFixedSize(150)
 				.bindContentsToProperty("nombre");
 
-		Column<Mejora> namekColumn = new Column<Mejora>(table);
-		namekColumn.setTitle("Nombre");
-		namekColumn.setFixedSize(150);
-		namekColumn.bindContentsToProperty("nombre");
-
+//		Column<Mejora> namekColumn = new Column<Mejora>(table);
+//		namekColumn.setTitle("Nombre");
+//		namekColumn.setFixedSize(150);
+//		namekColumn.bindContentsToProperty("nombre");
 
 	}
 
@@ -135,7 +130,7 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 				Color.BLACK);
 		new Label(panelInfo).bindValueToProperty("semillaSeleccionada.nombre");
 		new Label(panelEtiqueta).setText("Recursos").setForeground(Color.BLACK);
-		new Label(panelInfo).setText("EJ 100").setForeground(Color.BLACK);
+		new Label(panelInfo).bindValueToProperty("jardinZen.jardin.recursos");
 
 	}
 
