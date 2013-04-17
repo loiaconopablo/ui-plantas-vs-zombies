@@ -121,10 +121,6 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 		new Column<Semilla>(table).setTitle("Nombre").setFixedSize(150)
 				.bindContentsToProperty("nombre");
 
-		Column<Semilla> namekColumn = new Column<Semilla>(table);
-		namekColumn.setTitle("Nombre");
-		namekColumn.setFixedSize(150);
-		namekColumn.bindContentsToProperty("nombre");
 
 		Column<Semilla> defenseColumn = new Column<Semilla>(table);
 		defenseColumn.setTitle("CapacidadDefensiva");

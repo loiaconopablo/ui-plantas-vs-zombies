@@ -33,6 +33,8 @@ public class AdministradorJardinZen {
 	private int espacioDisponible = (20 - this.semillasSelect.size());
 		
 
+	
+
 	/**
 	 * Acciones
 	 */
@@ -53,7 +55,6 @@ public class AdministradorJardinZen {
 						}
 				}
 					
-			
 	
 	
 		
