@@ -17,6 +17,7 @@ public class InicioWindow extends SimpleWindow<Tablero> {
 
 	public InicioWindow(WindowOwner parent) {
 		super(parent, new Tablero());
+	
 	}
 
 	@Override
@@ -57,6 +58,7 @@ public class InicioWindow extends SimpleWindow<Tablero> {
 	 */
 	public void jugar(){
 		this.openDialog(new TableroWindow(this, this.getModelObject()));
+		
 	}
 	
 	protected void openDialog(Dialog<?> dialog) {

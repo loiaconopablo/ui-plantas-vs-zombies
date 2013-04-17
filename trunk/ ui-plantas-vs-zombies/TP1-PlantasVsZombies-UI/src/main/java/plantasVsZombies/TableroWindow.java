@@ -32,7 +32,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	public TableroWindow(WindowOwner parent, Tablero tablero) {
 		super(parent, tablero);
-		// TODO Auto-generated constructor stub
+		this.getModelObject().jugar();//lo agregue para que cree las filas que queremos
 	}
 
 	@Override
