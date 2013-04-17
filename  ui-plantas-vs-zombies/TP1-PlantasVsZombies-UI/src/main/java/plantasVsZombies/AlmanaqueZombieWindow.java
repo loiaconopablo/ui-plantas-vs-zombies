@@ -47,8 +47,20 @@ public class AlmanaqueZombieWindow extends TransactionalDialog<AlmanaqueZombie> 
 		super.createMainTemplate(mainPanel);
 
 		this.createResultsGrid(mainPanel);
+		
 	}
+	@Override
+	protected void createFormPanel(Panel mainPanel) {
+		Panel searchFormPanel = new Panel(mainPanel);
+		searchFormPanel.setLayout(new VerticalLayout());
+		
+		new Label(searchFormPanel).bindValueToProperty("zombieSeleccionado.nombre");
 
+		new Label(searchFormPanel).setText("Nombre del zombie").setForeground(
+				Color.BLUE);
+		new TextBox(searchFormPanel).bindValueToProperty("nombre");
+
+	}
 	private void createResultsGrid(Panel mainPanel) {
 		Table<Zombie> table = new Table<Zombie>(mainPanel, Zombie.class);
 		table.setHeigth(200);
@@ -76,17 +88,6 @@ public class AlmanaqueZombieWindow extends TransactionalDialog<AlmanaqueZombie> 
 		
 	}
 
-	@Override
-	protected void createFormPanel(Panel mainPanel) {
-		Panel searchFormPanel = new Panel(mainPanel);
-		searchFormPanel.setLayout(new VerticalLayout());
-		
-		new Label(searchFormPanel).bindValueToProperty("zombieSeleccionado.nombre");
-
-		new Label(searchFormPanel).setText("Nombre del zombie").setForeground(
-				Color.BLUE);
-		new TextBox(searchFormPanel).bindValueToProperty("nombre");
-
-	}
+	
 
 }

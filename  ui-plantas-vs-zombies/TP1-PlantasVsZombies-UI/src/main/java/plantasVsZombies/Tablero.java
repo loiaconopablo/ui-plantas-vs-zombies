@@ -1,6 +1,7 @@
 package plantasVsZombies;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
@@ -9,10 +10,12 @@ import org.uqbar.commons.utils.Transactional;
 import plantaszombies.AlmanaqueDeZombies;
 import plantaszombies.Jardin;
 import plantaszombies.JardinZen;
+import plantaszombies.Mejora;
 import plantaszombies.Partida;
 import plantaszombies.Planta;
 import plantaszombies.Semilla;
 import plantaszombies.Terreno;
+import plantaszombies.Tipo;
 import plantaszombies.TipoTerrenoAcuatico;
 import plantaszombies.Zombie;
 
@@ -23,7 +26,7 @@ import plantaszombies.Zombie;
 public class Tablero implements Serializable{
 	private int filasTerrestres;
 	private int filasAcuaticas;
-	private Jardin jardin = new Jardin (2,2);
+	private Jardin jardin;
 	private int fila;
 	private int columna;
 	private Semilla semilla;
@@ -144,7 +147,7 @@ public class Tablero implements Serializable{
 	
 	public void jugar(){
 		this.jardin = new Jardin(this.getFilasTerrestres(),this.getFilasAcuaticas());
-		this.partida = new Partida(this.getJardin(),new JardinZen(this.getJardin(),null));//falta pasarle la lista de mejoras o ya crear una lista de mejoras por defecto en el jardin zen
+		this.partida = new Partida(this.getJardin(),new JardinZen(this.getJardin()));
 	}
 
 	public void plantar(){
@@ -156,4 +159,9 @@ public class Tablero implements Serializable{
 		this.partida.setTerrenoAAtacar(this.jardin.getFilas().get(this.filaAAtacar));
 		this.partida.atacar();
 	}
+	
+	
+	
+	
+	
 }
