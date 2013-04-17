@@ -151,11 +151,11 @@ public class Tablero implements Serializable{
 	}
 
 	public void plantar(){
-		this.getJardin().getFilas().get(this.getFila()).aniadirEn(this.getSemilla(), this.getColumna());
+		this.getJardin().plantar(this.getFila(),this.getColumna(), this.getSemilla());
 	}
 	
 	public void atacar(){
-		this.zombieAtacante=this.getZombieAtacante();
+		this.partida.setZombieAtacante(this.getZombieAtacante());
 		this.partida.setTerrenoAAtacar(this.jardin.getFilas().get(this.filaAAtacar));
 		this.partida.atacar();
 	}

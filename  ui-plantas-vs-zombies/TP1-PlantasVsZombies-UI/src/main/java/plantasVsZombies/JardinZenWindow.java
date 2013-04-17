@@ -16,13 +16,15 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+import plantaszombies.Partida;
 import plantaszombies.Semilla;
 import plantaszombies.Zombie;
 
 public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen> {
 
-	public JardinZenWindow(WindowOwner owner ) {
-		super(owner, new AdministradorJardinZen());
+	public JardinZenWindow(WindowOwner owner, Partida partida ) {
+		super(owner, new AdministradorJardinZen(partida));
+		
 	}
 
 	

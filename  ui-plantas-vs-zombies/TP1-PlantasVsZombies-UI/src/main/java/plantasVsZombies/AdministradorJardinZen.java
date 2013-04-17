@@ -1,39 +1,38 @@
 package plantasVsZombies;
 
-import org.uqbar.arena.actions.MessageSend;
-import org.uqbar.arena.aop.windows.TransactionalDialog;
-import org.uqbar.arena.bindings.ObservableProperty;
-import org.uqbar.arena.bindings.PropertyAdapter;
-
-import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
-import plantaszombies.Jardin;
-import plantaszombies.Semilla;
-import plantaszombies.Tipo;
-import plantaszombies.JardinZen;
-import plantaszombies.Mejora;
-import plantaszombies.Zombie;
-import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.tables.Column;
-import org.uqbar.arena.widgets.tables.Table;
-import org.uqbar.arena.windows.Dialog;
-import org.uqbar.arena.windows.WindowOwner;
+
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
+
+import plantaszombies.Jardin;
+import plantaszombies.JardinZen;
+import plantaszombies.Partida;
+import plantaszombies.Semilla;
 
 @Transactional
 @Observable
 public class AdministradorJardinZen {
 	
 	private Semilla semillaSeleccionada;
-	private JardinZen jardinZen = new JardinZen(new Jardin(2,2));
-	private List<Semilla> semillasSelect = jardinZen.getSemillasAcuaticas();
+	private JardinZen jardinZen; //= new JardinZen(new Jardin(2,2));
+	private List<Semilla> semillasSelect;// = jardinZen.getSemillasAcuaticas();
 	private String jardinSelect = "Jardin Acuatico";
-	private int espacioDisponible = (20 - this.semillasSelect.size());
+	private int espacioDisponible; // = (20 - this.semillasSelect.size());
+	private Partida partida;
+	
 		
 
 	
+
+	public AdministradorJardinZen(Partida partida) {
+		this.partida = partida;
+		this.jardinZen = this.partida.getJardinZen();
+		this.semillasSelect= this.jardinZen.getSemillasAcuaticas();
+		this.espacioDisponible= (20 - this.semillasSelect.size());
+	}
+
+
 
 	/**
 	 * Acciones
@@ -48,12 +47,14 @@ public class AdministradorJardinZen {
 	public void irAlOtroJardin() {
 			if (this.jardinSelect.equals("Jardin Acuatico")){
 				this.semillasSelect = jardinZen.getSemillasTerrestres();
-				this.jardinSelect = "Jardin Terreste";}
-				else {
+				this.jardinSelect = "Jardin Terreste";
+				}
+			if (this.jardinSelect.equals("Jardin Terrestre")){
 					this.semillasSelect = jardinZen.getSemillasAcuaticas();
 					this.jardinSelect = "Jardin Acuatico";
-						}
 				}
+			
+	}
 					
 	
 	
@@ -61,6 +62,13 @@ public class AdministradorJardinZen {
 	/**
 	 * Getter y Setters
 	 */
+	
+	public Partida getPartida() {
+		return partida;
+	}
+	public void setPartida(Partida partida) {
+		this.partida = partida;
+	}
 	public Semilla getSemillaSeleccionada() {
 		return semillaSeleccionada;
 	}
