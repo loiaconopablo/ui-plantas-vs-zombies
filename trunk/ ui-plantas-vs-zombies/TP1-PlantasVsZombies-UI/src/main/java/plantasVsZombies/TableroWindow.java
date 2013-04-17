@@ -115,10 +115,6 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 		
 		Binding<ListBuilder<Semilla>> itemsBinding = selector.bindItemsToProperty("partida.jardinZen.semillas");
 
-//		Binding<ListBuilder<Semilla>> itemsBinding = selector.bindItems( //
-//				new ObservableProperty(this.getModelObject(),
-//						"modelos"));
-
 		itemsBinding.setAdapter( //
 				new PropertyAdapter(Semilla.class, "nombre"));
 

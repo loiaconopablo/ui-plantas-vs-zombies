@@ -10,7 +10,6 @@ import plantaszombies.JardinZen;
 import plantaszombies.Partida;
 import plantaszombies.Semilla;
 
-@Transactional
 @Observable
 public class AdministradorJardinZen {
 	
@@ -45,16 +44,16 @@ public class AdministradorJardinZen {
 
 
 	public void irAlOtroJardin() {
-			if (this.jardinSelect.equals("Jardin Acuatico")){
-				this.semillasSelect = jardinZen.getSemillasTerrestres();
-				this.jardinSelect = "Jardin Terreste";
-				}
-			if (this.jardinSelect.equals("Jardin Terrestre")){
-					this.semillasSelect = jardinZen.getSemillasAcuaticas();
-					this.jardinSelect = "Jardin Acuatico";
-				}
+		if (this.jardinSelect.equals("Jardin Acuatico")){
+			this.semillasSelect = jardinZen.getSemillasTerrestres();
+			this.jardinSelect = "Jardin Terrestre";
+		}
+		else {
+			this.semillasSelect = jardinZen.getSemillasAcuaticas();
+			this.jardinSelect = "Jardin Acuatico";
+		}
 			
-	}
+ 	}
 					
 	
 	
