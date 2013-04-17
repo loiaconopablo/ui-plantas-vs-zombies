@@ -112,13 +112,15 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 		new Label(panel).setText("Columna:").setForeground(Color.GREEN);
 		new TextBox(panel).bindValueToProperty("columna");
+		
+		Binding<ListBuilder<Semilla>> itemsBinding = selector.bindItemsToProperty("partida.jardinZen.semillas");
 
 //		Binding<ListBuilder<Semilla>> itemsBinding = selector.bindItems( //
-//				new ObservableProperty(RepositorioModelos.getInstance(),
+//				new ObservableProperty(this.getModelObject(),
 //						"modelos"));
-//
-//		itemsBinding.setAdapter( //
-//				new PropertyAdapter(Semilla.class, "nombre"));
+
+		itemsBinding.setAdapter( //
+				new PropertyAdapter(Semilla.class, "nombre"));
 
 		Button plantar = new Button(panel);
 		plantar.setCaption("Plantar");
@@ -131,7 +133,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 		table.setHeigth(200);
 		table.setWidth(500);
 
-		table.bindItemsToProperty("filas");
+		table.bindItemsToProperty("jardin.filas");
 
 		this.describeResultsGrid(table);
 	}
@@ -185,7 +187,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 	}
 
 	public void irAlJardinZen() {
-		this.openDialog(new JardinZenWindow(this));
+		this.openDialog(new JardinZenWindow(this,this.getModelObject().getPartida()));
 	}
 
 	protected void openDialog(Dialog<?> dialog) {
