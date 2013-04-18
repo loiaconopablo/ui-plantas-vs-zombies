@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import org.uqbar.arena.actions.MessageSend;
 import org.uqbar.arena.aop.windows.TransactionalDialog;
+import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
@@ -44,22 +45,18 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 		panelDeSemillas.setLayout(new VerticalLayout());
 		
 		this.createResultsGrid(panelDeSemillas);
-				
-		Panel mejorarPanel = new Panel(mainPanel);
-		mejorarPanel.setLayout(new HorizontalLayout());
 		
-		new Label(panelDeSemillas).setText("Seleccionado").setForeground(Color.BLACK);
-		new Label(panelDeSemillas).bindValueToProperty("semillaSeleccionada.nombre");
-		
-		Button plantar = new Button(mejorarPanel);
-		plantar.setCaption("Mejorar");
-		plantar.onClick(new MessageSend(this, "irAMejorarPlantas"));
-		
-		Button irAlOtroJardin = new Button(mejorarPanel);
-		irAlOtroJardin.setCaption("Ir al Siguiente Jardin");
-		irAlOtroJardin.onClick(new MessageSend(this.getModelObject(), "irAlOtroJardin"));
+		this.createPanelUltimoBotones(mainPanel);
 		
 	}
+	
+	@Override
+	protected void createFormPanel(Panel mainPanel) {
+		Panel searchFormPanel = new Panel(mainPanel);
+		searchFormPanel.setLayout(new ColumnLayout(2));
+						
+	}
+	
 	private void crearPanelDeInformacion(Panel infoPanel) {
 		Panel panelEtiqueta = new Panel(infoPanel);
 		panelEtiqueta.setLayout(new VerticalLayout());
@@ -77,36 +74,7 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 			new Label(panelEtiqueta).setText("Lugares Disponibles:").setForeground(Color.BLACK);	
 		
 		}
-			
-			
-
-
-	@Override
-	protected void createFormPanel(Panel mainPanel) {
-		Panel searchFormPanel = new Panel(mainPanel);
-		searchFormPanel.setLayout(new ColumnLayout(2));
-						
-	}
-
-	
-		//this.createColumnaLabel(actionsPanel);
-			
-
-//	private void createColumnaLabel(Panel actionsPanel) {
-//		Panel panelColumnaLabel = new Panel(actionsPanel);
-//		panelColumnaLabel.setLayout(new HorizontalLayout());
-//		new Label(actionsPanel).setText("Zombie").setForeground(Color.BLACK);
-//		//new Label(actionsPanel).bindValueToProperty("zombieAtacante.nombre");
-//		new Label(actionsPanel).setText("Jardin Zen Seleccionado").setForeground(Color.RED);
-//				new Label(actionsPanel).bindValueToProperty("jardinSelect");
-//		new Label(actionsPanel).setText("Lugares Disponibles:").setForeground(Color.BLACK);
-//		new Label(actionsPanel).bindValueToProperty("espacioDisponible");
-//						
-//	}
-
-	
-
-
+		
 	private void createResultsGrid(Panel mainPanel) {
 		Table<Semilla> table = new Table<Semilla>(mainPanel, Semilla.class);
 		table.setHeigth(200);
@@ -116,8 +84,7 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 		table.bindValueToProperty("semillaSeleccionada");
 
 		this.describeResultsGrid(table);
-		
-	}
+		}
 
 	protected void describeResultsGrid(Table<Semilla> table) {
 		new Column<Semilla>(table).setTitle("Nombre").setFixedSize(150)
@@ -130,6 +97,34 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 		defenseColumn.bindContentsToProperty("capacidadDefensiva");
 		
 		}
+	
+	private void createPanelUltimoBotones(Panel mainPanel) {
+		Panel mejorarPanel = horizontal(mainPanel);
+				
+		new Label(mejorarPanel).setText("Seleccionado").setForeground(Color.BLACK);
+		new Label(mejorarPanel).setWidth(100).bindValueToProperty("semillaSeleccionada.nombre");
+			
+		Button plantar = new Button(mejorarPanel);
+		plantar.setCaption("Mejorar");
+		plantar.onClick(new MessageSend(this, "irAMejorarPlantas"));
+		
+		Panel botonesFinales = new Panel(mainPanel);
+		botonesFinales.setLayout(new HorizontalLayout());
+				
+		Button jugar = new Button(botonesFinales);
+		jugar.setCaption("Jugar");
+		jugar.onClick(new MessageSend(this.getModelObject(), "jugar"));
+		
+		Button irAlOtroJardin = new Button(botonesFinales);
+		irAlOtroJardin.setCaption("Ir al Siguiente Jardin");
+		irAlOtroJardin.onClick(new MessageSend(this.getModelObject(), "irAlOtroJardin"));
+		
+		// Deshabilitar los botones si no hay ningún elemento seleccionado en la grilla.
+		NotNullObservable elementSelected = new NotNullObservable("semillaSeleccionada");
+		plantar.bindEnabled(elementSelected);
+		
+}
+	
 	
 	/*
 	 * Acciones
@@ -144,6 +139,18 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 		dialog.open();
 		}
 	
+	
+	public Panel horizontal(Panel parent){
+		Panel panel = new Panel(parent);
+		panel.setLayout(new HorizontalLayout());
+		return panel;
+	}
+	
+	public Panel vertical(Panel parent){
+		Panel panel = new Panel(parent);
+		panel.setLayout(new VerticalLayout());
+		return panel;
+	}
 	
 
 }

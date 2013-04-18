@@ -135,18 +135,17 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 	}
 
 	protected void describeResultsGrid(Table<Terreno> table) {
-
-		new Column<Terreno>(table).setTitle("Tipo").setFixedSize(150)
+		new Column<Terreno>(table).setTitle("Tipo").setFixedSize(100)
 				.bindContentsToProperty("tipoTerrenoToString");
-		new Column<Terreno>(table).setTitle("1").setFixedSize(150)
+		new Column<Terreno>(table).setTitle("0").setFixedSize(100)
 				.bindContentsToProperty("primero");
-		new Column<Terreno>(table).setTitle("2").setFixedSize(150)
+		new Column<Terreno>(table).setTitle("1").setFixedSize(100)
 				.bindContentsToProperty("segundo");
-		new Column<Terreno>(table).setTitle("3").setFixedSize(150)
+		new Column<Terreno>(table).setTitle("2").setFixedSize(100)
 				.bindContentsToProperty("tercero");
-		new Column<Terreno>(table).setTitle("4").setFixedSize(150)
+		new Column<Terreno>(table).setTitle("3").setFixedSize(100)
 				.bindContentsToProperty("cuarto");
-		new Column<Terreno>(table).setTitle("5").setFixedSize(150)
+		new Column<Terreno>(table).setTitle("4").setFixedSize(100)
 				.bindContentsToProperty("quinto");
 
 	}
