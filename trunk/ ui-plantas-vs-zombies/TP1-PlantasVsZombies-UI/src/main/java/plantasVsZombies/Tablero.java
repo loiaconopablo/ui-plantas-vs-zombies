@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
 
@@ -22,7 +23,6 @@ import plantaszombies.Zombie;
 
 @SuppressWarnings("serial")
 @Observable
-@Transactional
 public class Tablero implements Serializable{
 	private int filasTerrestres;
 	private int filasAcuaticas;
@@ -158,6 +158,14 @@ public class Tablero implements Serializable{
 		this.partida.setZombieAtacante(this.getZombieAtacante());
 		this.partida.setTerrenoAAtacar(this.jardin.getFilas().get(this.filaAAtacar));
 		this.partida.atacar();
+		
+		for (Terreno terreno : this.getJardin().getFilas()) {
+			ObservableUtils.forceFirePropertyChanged(terreno, "primero", terreno.getPrimero());
+			ObservableUtils.forceFirePropertyChanged(terreno, "segundo", terreno.getPrimero());
+			ObservableUtils.forceFirePropertyChanged(terreno, "tercero", terreno.getPrimero());
+			ObservableUtils.forceFirePropertyChanged(terreno, "cuarto", terreno.getPrimero());
+			ObservableUtils.forceFirePropertyChanged(terreno, "quinto", terreno.getPrimero());
+		}
 	}
 	
 	
