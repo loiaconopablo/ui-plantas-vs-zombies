@@ -68,6 +68,33 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	}
 
+	protected void createGridActions(Panel mainPanel) {
+		Panel actionsPanel = new Panel(mainPanel);
+		actionsPanel.setLayout(new HorizontalLayout());
+
+		Button zen = new Button(actionsPanel);
+		zen.setCaption("Ir al Jardin Zen");
+		zen.onClick(new MessageSend(this, "irAlJardinZen"));
+		
+		Button almanaque = new Button(actionsPanel);
+		almanaque.setCaption("Almanaque de zombies");
+		almanaque.onClick(new MessageSend(this, "almanaqueDeZombies"));
+
+//		Button restart = new Button(actionsPanel);
+//		zen.setCaption("Reiniciar");
+//		zen.onClick(new MessageSend(this, "reiniciar"));
+		
+		new Label(actionsPanel).setText("Recursos").setForeground(Color.BLACK);
+		new Label(actionsPanel).bindValueToProperty("jardin.recursos");
+
+	}
+
+	@Override
+	protected void createFormPanel(Panel mainPanel) {
+		Panel searchFormPanel = new Panel(mainPanel);
+		searchFormPanel.setLayout(new ColumnLayout(2));
+	}
+	
 	private void crearPanelDeZombie(Panel jardinPanel) {
 		Panel panelZombie = new Panel(jardinPanel);
 		panelZombie.setLayout(new VerticalLayout());
@@ -150,28 +177,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	}
 
-	protected void createGridActions(Panel mainPanel) {
-		Panel actionsPanel = new Panel(mainPanel);
-		actionsPanel.setLayout(new HorizontalLayout());
-
-		Button zen = new Button(actionsPanel);
-		zen.setCaption("Ir al Jardin Zen");
-		zen.onClick(new MessageSend(this, "irAlJardinZen"));
-
-		Button almanaque = new Button(actionsPanel);
-		almanaque.setCaption("Almanaque de zombies");
-		almanaque.onClick(new MessageSend(this, "almanaqueDeZombies"));
-
-		new Label(actionsPanel).setText("Recursos").setForeground(Color.BLACK);
-		new Label(actionsPanel).bindValueToProperty("jardin.recursos");
-
-	}
-
-	@Override
-	protected void createFormPanel(Panel mainPanel) {
-		Panel searchFormPanel = new Panel(mainPanel);
-		searchFormPanel.setLayout(new ColumnLayout(2));
-	}
+	
 
 	/**
 	 * Acciones
@@ -184,7 +190,11 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 	public void irAlJardinZen() {
 		this.openDialog(new JardinZenWindow(this,this.getModelObject().getPartida()));
 	}
-
+	
+	public void reiniciar(){
+		new MessageSend(this.getModelObject(), "jugar");
+	}
+	
 	protected void openDialog(Dialog<?> dialog) {
 		dialog.onAccept(new MessageSend(this.getModelObject(), "search"));
 		dialog.open();

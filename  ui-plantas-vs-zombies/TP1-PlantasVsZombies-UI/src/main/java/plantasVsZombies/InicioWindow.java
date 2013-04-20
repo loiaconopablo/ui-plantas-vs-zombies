@@ -58,7 +58,6 @@ public class InicioWindow extends SimpleWindow<Tablero> {
 	 */
 	public void jugar(){
 		this.openDialog(new TableroWindow(this, this.getModelObject()));
-		
 	}
 	
 	protected void openDialog(Dialog<?> dialog) {
