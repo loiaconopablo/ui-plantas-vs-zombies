@@ -1,23 +1,18 @@
 package plantasVsZombies;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.uqbar.commons.model.ObservableUtils;
 import org.uqbar.commons.utils.Observable;
-import org.uqbar.commons.utils.Transactional;
 
 import plantaszombies.AlmanaqueDeZombies;
 import plantaszombies.Jardin;
 import plantaszombies.JardinZen;
-import plantaszombies.Mejora;
 import plantaszombies.Partida;
-import plantaszombies.Planta;
 import plantaszombies.Semilla;
 import plantaszombies.Terreno;
-import plantaszombies.Tipo;
-import plantaszombies.TipoTerrenoAcuatico;
 import plantaszombies.Zombie;
 
 
@@ -34,15 +29,18 @@ public class Tablero implements Serializable{
 	private int filaAAtacar;
 	private Partida partida;
 	private AlmanaqueDeZombies almanaque = new AlmanaqueDeZombies();
-	
-	
+	//private List<String> logs = new ArrayList<String>();
 	
 	public Tablero(){
-		//this.jardin.getFilas().get(0).aniadirEn(new Semilla(new TipoTerrenoAcuatico(),"Girasol",50,50), 0);//es de prueba
+		
 	}
+	
 	/**
 	 * Accesors
 	 */
+	public List<String> getLogs() {
+		return this.jardin.getLogs();
+	}
 	
 	public Zombie getZombieAtacante() {
 		return zombieAtacante;
@@ -145,6 +143,7 @@ public class Tablero implements Serializable{
 	 * Acciones
 	 */
 	
+	
 	public void jugar(){
 		this.jardin = new Jardin(this.getFilasTerrestres(),this.getFilasAcuaticas());
 		this.partida = new Partida(this.getJardin(),new JardinZen(this.getJardin()));
@@ -152,6 +151,7 @@ public class Tablero implements Serializable{
 
 	public void plantar(){
 		this.getJardin().plantar(this.getFila(),this.getColumna(), this.getSemilla());
+		ObservableUtils.forceFirePropertyChanged(this, "logs", this.jardin.getLogs());
 	}
 	
 	public void atacar(){
