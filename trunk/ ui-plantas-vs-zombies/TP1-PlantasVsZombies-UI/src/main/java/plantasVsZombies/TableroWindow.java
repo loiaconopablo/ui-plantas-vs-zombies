@@ -59,11 +59,15 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 		this.crearPanelDeZombie(jardinPanel);
 
+		Panel panelDeTitulo = new Panel(mainPanel);
+		panelDeTitulo.setLayout(new HorizontalLayout());
+		
 		Panel panelDeSiembra = new Panel(mainPanel);
 		panelDeSiembra.setLayout(new VerticalLayout());
 
-		new Label(panelDeSiembra).setText("Plantas").setForeground(Color.BLUE);
-
+		new Label(panelDeTitulo).setText("Plantas").setForeground(Color.BLUE);
+		new Label(panelDeTitulo).setText("Elige una planta y selecciona una posicion").setForeground(Color.BLACK).setFontSize(8);
+		
 		this.crearGrillaDeSiembra(panelDeSiembra);
 
 	}
@@ -149,6 +153,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 		plantar.setCaption("Plantar");
 		plantar.onClick(new MessageSend(this.getModelObject(), "plantar"));
 
+		this.crearLogs(panel);
 	}
 
 	private void createResultsGrid(Panel mainPanel) {
@@ -177,7 +182,20 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	}
 
-	
+	private void crearLogs(Panel panel) {
+		
+//		Table<Jardin> table = new Table<Jardin>(panel, Jardin.class);
+//		table.setHeigth(200);
+//		table.setWidth(400);
+//		
+//		table.bindItemsToProperty("logs");
+//		
+//		new Column<Jardin>(table).setTitle("Acciones recientes").setFixedSize(100)
+//		.bindContentsToProperty("logs");
+		new Label(panel).setText("Acciones recientes");
+		new Label(panel).bindValueToProperty("logs");
+		
+	}
 
 	/**
 	 * Acciones
