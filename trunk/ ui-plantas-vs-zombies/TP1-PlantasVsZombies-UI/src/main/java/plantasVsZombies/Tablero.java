@@ -29,7 +29,6 @@ public class Tablero implements Serializable{
 	private int filaAAtacar;
 	private Partida partida;
 	private AlmanaqueDeZombies almanaque = new AlmanaqueDeZombies();
-	//private List<String> logs = new ArrayList<String>();
 	
 	public Tablero(){
 		
@@ -145,7 +144,7 @@ public class Tablero implements Serializable{
 	
 	
 	public void jugar(){
-		this.jardin = new Jardin(this.getFilasTerrestres(),this.getFilasAcuaticas());
+		this.jardin = new Jardin(this.getFilasAcuaticas(),this.getFilasTerrestres());
 		this.partida = new Partida(this.getJardin(),new JardinZen(this.getJardin()));
 	}
 
