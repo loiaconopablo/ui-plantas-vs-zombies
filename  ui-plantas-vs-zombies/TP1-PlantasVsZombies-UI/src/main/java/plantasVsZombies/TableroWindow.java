@@ -84,9 +84,9 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 		almanaque.setCaption("Almanaque de zombies");
 		almanaque.onClick(new MessageSend(this, "almanaqueDeZombies"));
 
-//		Button restart = new Button(actionsPanel);
-//		zen.setCaption("Reiniciar");
-//		zen.onClick(new MessageSend(this, "reiniciar"));
+		Button restart = new Button(actionsPanel);
+		restart.setCaption("Reiniciar");
+		restart.onClick(new MessageSend(this.getModelObject(), "jugar"));
 		
 		new Label(actionsPanel).setText("Recursos").setForeground(Color.BLACK);
 		new Label(actionsPanel).bindValueToProperty("jardin.recursos");
@@ -130,6 +130,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 	}
 
 	private void crearGrillaDeSiembra(Panel panelDeSiembra) {
+		
 		Panel panel = new Panel(panelDeSiembra);
 		panel.setLayout(new HorizontalLayout());
 
@@ -184,18 +185,12 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	private void crearLogs(Panel panel) {
 		
-//		Table<Jardin> table = new Table<Jardin>(panel, Jardin.class);
-//		table.setHeigth(200);
-//		table.setWidth(400);
-//		
-//		table.bindItemsToProperty("logs");
-//		
-//		new Column<Jardin>(table).setTitle("Acciones recientes").setFixedSize(100)
-//		.bindContentsToProperty("logs");
-		new Label(panel).setText("Acciones recientes");
-		new Label(panel).bindValueToProperty("logs");
+		Table<Jardin> table = new Table<Jardin>(panel, Jardin.class);
+		table.setHeigth(200);
+		table.setWidth(400);
 		
-	}
+		table.bindItemsToProperty("jardin.logs");
+		}
 
 	/**
 	 * Acciones
@@ -207,10 +202,6 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	public void irAlJardinZen() {
 		this.openDialog(new JardinZenWindow(this,this.getModelObject().getPartida()));
-	}
-	
-	public void reiniciar(){
-		new MessageSend(this.getModelObject(), "jugar");
 	}
 	
 	protected void openDialog(Dialog<?> dialog) {
