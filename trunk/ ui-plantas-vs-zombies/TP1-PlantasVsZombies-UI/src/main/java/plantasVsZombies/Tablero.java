@@ -10,6 +10,7 @@ import org.uqbar.commons.utils.Observable;
 import plantaszombies.AlmanaqueDeZombies;
 import plantaszombies.Jardin;
 import plantaszombies.JardinZen;
+import plantaszombies.Loggeable;
 import plantaszombies.Partida;
 import plantaszombies.Semilla;
 import plantaszombies.Terreno;
@@ -22,7 +23,7 @@ import plantaszombies.Zombie;
  */
 @SuppressWarnings("serial")
 @Observable
-public class Tablero implements Serializable{
+public class Tablero implements Serializable, Loggeable{
 	private int filasTerrestres;
 	private int filasAcuaticas;
 	private Jardin jardin;
@@ -33,6 +34,7 @@ public class Tablero implements Serializable{
 	private int filaAAtacar;
 	private Partida partida;
 	private AlmanaqueDeZombies almanaque = new AlmanaqueDeZombies();
+	private List<String> logs = new ArrayList<String>();
 	
 	public Tablero(){
 		
@@ -42,7 +44,11 @@ public class Tablero implements Serializable{
 	 * Accesors
 	 */
 	public List<String> getLogs() {
-		return this.jardin.getLogs();
+		return this.logs;
+	}
+	
+	public void setLogs(List<String> logs) {
+		this.logs = logs;
 	}
 	
 	public Zombie getZombieAtacante() {
@@ -152,7 +158,32 @@ public class Tablero implements Serializable{
 		this.partida = new Partida(this.getJardin(),new JardinZen(this.getJardin()));
 		this.actualizaGrilla();
 	}
+	
+	public void reiniciar(){
+		this.jugar();
+		this.almanaque = new AlmanaqueDeZombies();
+		this.logs = new ArrayList<String>();
+	}
 
+	public void plantar(){
+		this.getJardin().plantar(this.getFila(),this.getColumna(), this.getSemilla());
+		this.actualizarLog("Sembraste "+ this.getSemilla().getNombre()+ " en casillero " + this.getColumna());
+	}
+	
+	public void atacar(){
+		this.partida.setZombieAtacante(this.getZombieAtacante());
+		this.quitarZombieDeLaLista(this.getZombieAtacante());
+		this.partida.setTerrenoAAtacar(this.jardin.getFilas().get(this.filaAAtacar));
+		this.partida.atacar(this);
+		this.actualizaGrilla();
+		ObservableUtils.forceFirePropertyChanged(this, "almanaque", this.getAlmanaque());		
+	}
+
+	private void quitarZombieDeLaLista(Zombie zombie) {
+		this.almanaque.borrarZombie(zombie);
+		
+	}
+	
 	private void actualizaGrilla() {
 		for (Terreno terreno : this.getJardin().getFilas()) {
 			ObservableUtils.forceFirePropertyChanged(terreno, "primero", terreno.getPrimero());
@@ -164,27 +195,12 @@ public class Tablero implements Serializable{
 		
 	}
 
-	public void plantar(){
-		this.getJardin().plantar(this.getFila(),this.getColumna(), this.getSemilla());
-		ObservableUtils.forceFirePropertyChanged(this, "logs", this.jardin.getLogs());
-		}
-	
-	public void atacar(){
-		this.setZombieAtacanteParaAtaqueYJardinZen();
-		this.partida.setTerrenoAAtacar(this.jardin.getFilas().get(this.filaAAtacar));
-		this.partida.atacar();
-		this.actualizaGrilla();
-			
+	public void actualizarLog(String string) {
+		List<String> logsTemp = this.getLogs();
+ 		logsTemp.add(string);
+ 		this.logs = null;
+ 		this.logs = new ArrayList<String>(logsTemp);
+		
 	}
-	
-	public void setZombieAtacanteParaAtaqueYJardinZen(){
-		this.partida.setZombieAtacante(this.getZombieAtacante());
-		ObservableUtils.forceFirePropertyChanged(partida, "zombieAtacante", partida.getZombieAtacante());
-		ObservableUtils.forceFirePropertyChanged(this, "partida", this.getPartida());
-		}
-	
-	
-	
-	
 	
 }
