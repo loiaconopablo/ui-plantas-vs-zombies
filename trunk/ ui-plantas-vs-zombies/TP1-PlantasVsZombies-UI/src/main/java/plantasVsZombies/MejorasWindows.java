@@ -39,86 +39,18 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 
 	protected void createMainTemplate(Panel mainPanel) {
 		this.setTitle("Aplicar Mejoras");
-		this.setTaskDescription("Estas son las mejoas que tienes disponible");
-
+		this.setTaskDescription("Aquí podras mejorar tus plantas!");
 		super.createMainTemplate(mainPanel);
 
 		Panel infoPanel = new Panel(mainPanel);
 		infoPanel.setLayout(new HorizontalLayout());
 
 		this.crearPanelDeInformacion(infoPanel);
-
-		Panel panelDeMejoras = new Panel(mainPanel);
-		panelDeMejoras.setLayout(new HorizontalLayout());
-
-		this.createResultsGrid(panelDeMejoras);
-		this.createResultsGridTwo(panelDeMejoras);
-
-		Panel resultadoCompra = new Panel(mainPanel);
-		resultadoCompra.setLayout(new HorizontalLayout());
-
-		this.crearPanelDeResultadoCompra(resultadoCompra);
-
-		Button comprar = new Button(resultadoCompra);
-		comprar.setCaption("Comprar");
-		comprar.onClick(new MessageSend(this, "irAMejorarPlantas"));
-
-		Button cerrar = new Button(resultadoCompra);
-		cerrar.setCaption("Ir al Siguiente Jardin");
-		cerrar.onClick(new MessageSend(this.getModelObject(), "irAlOtroJardin"));
-
+		this.crearCuadros(mainPanel);
+		this.crearResultadoCompraYBotonesFinales(mainPanel);
+				
 	}
-
-	private void crearPanelDeResultadoCompra(Panel resultadoCompra) {
-		new Label(resultadoCompra).setText("Aca va a ir el resultado de la compra").setForeground(Color.BLACK);
-		
-	}
-
-	private void createResultsGrid(Panel mainPanel) {
-		Table<Mejora> table = new Table<Mejora>(mainPanel, Mejora.class);
-		table.setHeigth(200);
-		table.setWidth(450);
-
-		table.bindItemsToProperty("semillaSeleccionada.mejorasAplicadas");
-	//	 table.bindValueToProperty("semillaSeleccionada");
-
-		this.describeResultsGrid(table);
-
-	}
-
-	private void createResultsGridTwo(Panel mainPanel) {
-		Table<Mejora> table = new Table<Mejora>(mainPanel, Mejora.class);
-		table.setHeigth(200);
-		table.setWidth(450);
-
-		table.bindItemsToProperty("jardinZen.mejorasPredefinidas");
-		// table.bindValueToProperty("semillaSeleccionada");
-
-		this.describeResultsGridTwo(table);
-
-	}
-
-	private void describeResultsGridTwo(Table<Mejora> table) {
-		new Column<Mejora>(table).setTitle("Nombre").setFixedSize(150)
-				.bindContentsToProperty("nombre");
 	
-		Column<Mejora> defenseColumn = new Column<Mejora>(table);
-		defenseColumn.setTitle("Costo");
-		defenseColumn.setFixedSize(150);
-		defenseColumn.bindContentsToProperty("costo");
-
-	}
-	private void describeResultsGrid(Table<Mejora> table) {
-		new Column<Mejora>(table).setTitle("Nombre").setFixedSize(150)
-				.bindContentsToProperty("nombre");
-
-//		Column<Mejora> namekColumn = new Column<Mejora>(table);
-//		namekColumn.setTitle("Nombre");
-//		namekColumn.setFixedSize(150);
-//		namekColumn.bindContentsToProperty("nombre");
-
-	}
-
 	private void crearPanelDeInformacion(Panel infoPanel) {
 		Panel panelEtiqueta = new Panel(infoPanel);
 		panelEtiqueta.setLayout(new VerticalLayout());
@@ -131,9 +63,75 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 		new Label(panelInfo).bindValueToProperty("semillaSeleccionada.nombre");
 		new Label(panelEtiqueta).setText("Recursos").setForeground(Color.BLACK);
 		new Label(panelInfo).bindValueToProperty("jardinZen.jardin.recursos");
-
 	}
 
+	private void crearCuadros(Panel infoPanel) {
+		Panel panelDeMejoras = new Panel(infoPanel);
+		panelDeMejoras.setLayout(new HorizontalLayout());
+
+		Panel columnaCompradas = new Panel(panelDeMejoras);
+		infoPanel.setLayout(new VerticalLayout());
+		new Label(columnaCompradas).setText("Mejoras Compradas").setForeground(Color.BLACK).setFontSize(15);
+		this.createResultsGrid(columnaCompradas);
+		
+		Panel columnaDisponibles = new Panel(panelDeMejoras);
+		infoPanel.setLayout(new VerticalLayout());
+		new Label(columnaDisponibles).setText("Mejoras Disponibles").setForeground(Color.BLACK).setFontSize(15);
+		this.createResultsGridTwo(columnaDisponibles);
+							
+		}
+	
+	private void crearResultadoCompraYBotonesFinales(Panel mainPanel) {
+		Panel resultadoCompra = new Panel(mainPanel);
+		resultadoCompra.setLayout(new HorizontalLayout());
+
+		new Label(resultadoCompra).setText("Aca va a ir el resultado de la compra").setForeground(Color.BLACK);
+
+		Button comprar = new Button(resultadoCompra);
+		comprar.setCaption("Comprar");
+		comprar.onClick(new MessageSend(this.getModelObject(), "comprarMejora"));
+
+		Button cerrar = new Button(resultadoCompra);
+		cerrar.setCaption("Cerrar");
+		cerrar.onClick(new MessageSend(this.getModelObject(), "irAlJardinZen"));
+	}
+		
+	private void createResultsGrid(Panel mainPanel) {
+		Table<Mejora> table = new Table<Mejora>(mainPanel, Mejora.class);
+		table.setHeigth(200);
+		table.setWidth(450);
+
+		table.bindItemsToProperty("semillaSeleccionada.mejorasAplicadas");
+		//	 table.bindValueToProperty("semillaSeleccionada");
+
+		this.describeResultsGrid(table);
+	}
+	private void createResultsGridTwo(Panel mainPanel) {
+		Table<Mejora> table = new Table<Mejora>(mainPanel, Mejora.class);
+		table.setHeigth(200);
+		table.setWidth(450);
+
+		table.bindItemsToProperty("jardinZen.mejorasPredefinidas");
+		table.bindValueToProperty("mejoraSeleccionada");
+
+		this.describeResultsGridTwo(table);
+	}
+
+	private void describeResultsGridTwo(Table<Mejora> table) {
+		new Column<Mejora>(table).setTitle("Mejora").setFixedSize(200)
+				.bindContentsToProperty("nombre");
+	
+		Column<Mejora> defenseColumn = new Column<Mejora>(table);
+		defenseColumn.setTitle("Costo");
+		defenseColumn.setFixedSize(50);
+		defenseColumn.bindContentsToProperty("costo");
+
+	}
+	private void describeResultsGrid(Table<Mejora> table) {
+		new Column<Mejora>(table).setTitle("Mejora").setFixedSize(200)
+				.bindContentsToProperty("nombre");
+		}	
+	
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 
@@ -150,7 +148,6 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 	private void primeraFila(Panel actionsPanel) {
 		Panel panelFilaUno = new Panel(actionsPanel);
 		panelFilaUno.setLayout(new HorizontalLayout());
-
 	}
 
 	private void segundaFila(Panel actionsPanel) {

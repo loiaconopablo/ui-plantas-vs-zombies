@@ -64,14 +64,14 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 		Panel panelInfo = new Panel(infoPanel);
 		panelInfo.setLayout(new VerticalLayout());
 		
-			new Label(panelEtiqueta).setText("Zombie").setForeground(Color.BLACK);
-			new Label(panelInfo).setText("Nombre del Zombie").setForeground(Color.BLACK);
+			new Label(panelEtiqueta).setText("Zombie").setForeground(Color.BLACK).setFontSize(12);
+			new Label(panelInfo).setWidth(150).bindValueToProperty("partida.zombieAtacante.nombre");
 		
-			new Label(panelEtiqueta).setText("Jardin Zen Seleccionado").setForeground(Color.RED);
+			new Label(panelEtiqueta).setText("Jardin Zen Seleccionado").setForeground(Color.RED).setFontSize(12);
 			new Label(panelInfo).bindValueToProperty("jardinSelect");	
 	
 			new Label(panelInfo).bindValueToProperty("espacioDisponible");
-			new Label(panelEtiqueta).setText("Lugares Disponibles:").setForeground(Color.BLACK);	
+			new Label(panelEtiqueta).setText("Lugares Disponibles:").setForeground(Color.BLUE).setFontSize(12);	
 		
 		}
 		
@@ -96,12 +96,17 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 		defenseColumn.setFixedSize(150);
 		defenseColumn.bindContentsToProperty("capacidadDefensiva");
 		
+		Column<Semilla> ataqueColumn = new Column<Semilla>(table);
+		ataqueColumn.setTitle("Puntos de Daño");
+		ataqueColumn.setFixedSize(150);
+		ataqueColumn.bindContentsToProperty("puntosDeDanio");
+		
 		}
 	
 	private void createPanelUltimoBotones(Panel mainPanel) {
 		Panel mejorarPanel = horizontal(mainPanel);
 				
-		new Label(mejorarPanel).setText("Seleccionado").setForeground(Color.BLACK);
+		new Label(mejorarPanel).setText("Seleccionado").setForeground(Color.BLACK).setFontSize(12);
 		new Label(mejorarPanel).setWidth(100).bindValueToProperty("semillaSeleccionada.nombre");
 			
 		Button plantar = new Button(mejorarPanel);
@@ -119,7 +124,7 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 		irAlOtroJardin.setCaption("Ir al Siguiente Jardin");
 		irAlOtroJardin.onClick(new MessageSend(this.getModelObject(), "irAlOtroJardin"));
 		
-		// Deshabilitar los botones si no hay ningÃºn elemento seleccionado en la grilla.
+		// Deshabilitar los botones si no hay ningun elemento seleccionado en la grilla.
 		NotNullObservable elementSelected = new NotNullObservable("semillaSeleccionada");
 		plantar.bindEnabled(elementSelected);
 		
