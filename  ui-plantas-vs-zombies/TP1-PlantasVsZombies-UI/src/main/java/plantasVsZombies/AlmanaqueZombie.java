@@ -11,6 +11,10 @@ import org.uqbar.commons.utils.Observable;
 import plantaszombies.AlmanaqueDeZombies;
 import plantaszombies.Zombie;
 
+/**
+ * @author Mariano Varela, Pablo Loiacono
+ * 
+ */
 @Observable
 public class AlmanaqueZombie {
 	

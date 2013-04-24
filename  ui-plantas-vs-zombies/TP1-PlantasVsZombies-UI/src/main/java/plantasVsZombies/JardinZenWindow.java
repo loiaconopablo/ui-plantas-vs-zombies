@@ -21,10 +21,17 @@ import plantaszombies.Partida;
 import plantaszombies.Semilla;
 import plantaszombies.Zombie;
 
+/**
+ * @author Mariano Varela, Pablo Loiacono
+ * 
+ */
+
 public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen> {
 
 	public JardinZenWindow(WindowOwner owner, Partida partida ) {
 		super(owner, new AdministradorJardinZen(partida));
+		this.getModelObject().borrarResultadoUltimaCompra();
+		this.getModelObject().actualizarSemillas();
 		
 	}
 

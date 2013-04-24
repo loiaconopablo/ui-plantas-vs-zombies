@@ -16,6 +16,10 @@ import plantaszombies.Terreno;
 import plantaszombies.Zombie;
 
 
+/**
+ * @author Mariano Varela, Pablo Loiacono
+ * 
+ */
 @SuppressWarnings("serial")
 @Observable
 public class Tablero implements Serializable{
