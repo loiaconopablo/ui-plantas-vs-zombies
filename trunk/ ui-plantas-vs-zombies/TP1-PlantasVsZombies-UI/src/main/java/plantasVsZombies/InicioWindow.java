@@ -13,6 +13,11 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
+/**
+ * @author Mariano Varela, Pablo Loiacono
+ * 
+ */
+
 public class InicioWindow extends SimpleWindow<Tablero> {
 
 	public InicioWindow(WindowOwner parent) {

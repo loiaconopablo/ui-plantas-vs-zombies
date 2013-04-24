@@ -20,6 +20,10 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import plantaszombies.Zombie;
 
+/**
+ * @author Mariano Varela, Pablo Loiacono
+ * 
+ */
 public class AlmanaqueZombieWindow extends TransactionalDialog<AlmanaqueZombie> {
 
 	public AlmanaqueZombieWindow(WindowOwner parent) {

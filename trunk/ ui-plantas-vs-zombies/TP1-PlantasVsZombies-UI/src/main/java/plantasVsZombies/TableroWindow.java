@@ -28,6 +28,10 @@ import plantaszombies.Semilla;
 import plantaszombies.Terreno;
 import plantaszombies.Zombie;
 
+/**
+ * @author Mariano Varela, Pablo Loiacono
+ * 
+ */
 public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	public TableroWindow(WindowOwner parent, Tablero tablero) {

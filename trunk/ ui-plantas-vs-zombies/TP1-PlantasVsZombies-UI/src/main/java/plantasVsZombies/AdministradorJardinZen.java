@@ -1,5 +1,6 @@
 package plantasVsZombies;
 
+
 import java.util.List;
 
 import org.uqbar.commons.model.ObservableUtils;
@@ -12,6 +13,11 @@ import plantaszombies.Mejora;
 import plantaszombies.Partida;
 import plantaszombies.Semilla;
 import plantaszombies.Zombie;
+
+/**
+ * @author Mariano Varela, Pablo Loiacono
+ * 
+ */
 
 @Observable
 public class AdministradorJardinZen {
@@ -53,6 +59,7 @@ public class AdministradorJardinZen {
 		}
 	
 	public void actualizarSemillas() {
+		this.semillasSelect= this.jardinZen.getSemillasAcuaticas();
 		ObservableUtils.forceFirePropertyChanged(partida.getJardinZen(), "semillasAcuaticas", partida.getJardinZen().getSemillasAcuaticas());
 	}	
 	
