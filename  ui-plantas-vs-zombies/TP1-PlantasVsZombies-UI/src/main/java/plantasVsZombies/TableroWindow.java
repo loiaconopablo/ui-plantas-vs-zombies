@@ -32,7 +32,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	public TableroWindow(WindowOwner parent, Tablero tablero) {
 		super(parent, tablero);
-		this.getModelObject().jugar();//lo agregue para que cree las filas que queremos
+		this.getModelObject().jugar();
 	}
 
 	@Override
@@ -78,6 +78,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 		Button zen = new Button(actionsPanel);
 		zen.setCaption("Ir al Jardin Zen");
+		zen.onClick(new MessageSend(this.getModelObject(), "setZombieAtacanteParaAtaqueYJardinZen"));
 		zen.onClick(new MessageSend(this, "irAlJardinZen"));
 		
 		Button almanaque = new Button(actionsPanel);
@@ -88,7 +89,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 		restart.setCaption("Reiniciar");
 		restart.onClick(new MessageSend(this.getModelObject(), "jugar"));
 		
-		new Label(actionsPanel).setText("Recursos").setForeground(Color.BLACK);
+		new Label(actionsPanel).setText("Recursos").setForeground(Color.BLACK).setFontSize(10);
 		new Label(actionsPanel).bindValueToProperty("jardin.recursos");
 
 	}
@@ -202,7 +203,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 	public void irAlJardinZen() {
 		this.openDialog(new JardinZenWindow(this,this.getModelObject().getPartida()));
-	}
+		}
 	
 	protected void openDialog(Dialog<?> dialog) {
 		dialog.onAccept(new MessageSend(this.getModelObject(), "search"));

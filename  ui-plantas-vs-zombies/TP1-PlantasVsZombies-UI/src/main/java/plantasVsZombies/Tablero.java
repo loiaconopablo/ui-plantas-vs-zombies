@@ -146,18 +146,10 @@ public class Tablero implements Serializable{
 	public void jugar(){
 		this.jardin = new Jardin(this.getFilasAcuaticas(),this.getFilasTerrestres());
 		this.partida = new Partida(this.getJardin(),new JardinZen(this.getJardin()));
+		this.actualizaGrilla();
 	}
 
-	public void plantar(){
-		this.getJardin().plantar(this.getFila(),this.getColumna(), this.getSemilla());
-		ObservableUtils.forceFirePropertyChanged(this, "logs", this.jardin.getLogs());
-	}
-	
-	public void atacar(){
-		this.partida.setZombieAtacante(this.getZombieAtacante());
-		this.partida.setTerrenoAAtacar(this.jardin.getFilas().get(this.filaAAtacar));
-		this.partida.atacar();
-		
+	private void actualizaGrilla() {
 		for (Terreno terreno : this.getJardin().getFilas()) {
 			ObservableUtils.forceFirePropertyChanged(terreno, "primero", terreno.getPrimero());
 			ObservableUtils.forceFirePropertyChanged(terreno, "segundo", terreno.getPrimero());
@@ -165,7 +157,27 @@ public class Tablero implements Serializable{
 			ObservableUtils.forceFirePropertyChanged(terreno, "cuarto", terreno.getPrimero());
 			ObservableUtils.forceFirePropertyChanged(terreno, "quinto", terreno.getPrimero());
 		}
+		
 	}
+
+	public void plantar(){
+		this.getJardin().plantar(this.getFila(),this.getColumna(), this.getSemilla());
+		ObservableUtils.forceFirePropertyChanged(this, "logs", this.jardin.getLogs());
+		}
+	
+	public void atacar(){
+		this.setZombieAtacanteParaAtaqueYJardinZen();
+		this.partida.setTerrenoAAtacar(this.jardin.getFilas().get(this.filaAAtacar));
+		this.partida.atacar();
+		this.actualizaGrilla();
+			
+	}
+	
+	public void setZombieAtacanteParaAtaqueYJardinZen(){
+		this.partida.setZombieAtacante(this.getZombieAtacante());
+		ObservableUtils.forceFirePropertyChanged(partida, "zombieAtacante", partida.getZombieAtacante());
+		ObservableUtils.forceFirePropertyChanged(this, "partida", this.getPartida());
+		}
 	
 	
 	
