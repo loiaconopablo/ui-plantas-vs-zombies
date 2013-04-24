@@ -23,6 +23,7 @@ public class AdministradorJardinZen {
 	private int espacioDisponible;
 	private Partida partida;
 	private Mejora mejoraSeleccionada;
+	private String resultadoCompra;
 	
 	public AdministradorJardinZen(Partida partida) {
 		this.partida = partida;
@@ -37,9 +38,6 @@ public class AdministradorJardinZen {
 	 * Acciones
 	 */
 	
-	public void jugar(){
-		
-	}
 	
 	public void irAlOtroJardin() {
 		if (this.jardinSelect.equals("Jardin Acuatico")){
@@ -52,15 +50,27 @@ public class AdministradorJardinZen {
 			this.jardinSelect = "Jardin Acuatico";
 			this.espacioDisponible= (20 - this.semillasSelect.size());
 		}
-		
- 	}
+		}
+	
+	public void actualizarSemillas() {
+		ObservableUtils.forceFirePropertyChanged(partida.getJardinZen(), "semillasAcuaticas", partida.getJardinZen().getSemillasAcuaticas());
+	}	
 	
 	public void comprarMejora() {
+		this.resultadoCompra = this.mejoraSeleccionada.getNombre();
 		this.getSemillaSeleccionada().aplicarMejora(this.mejoraSeleccionada);
 		this.partida.getJardin().descontarRecursos(mejoraSeleccionada.getCosto());
+		this.semillasSelect=jardinZen.getSemillasAcuaticas();
+		
 		ObservableUtils.forceFirePropertyChanged(this, "semillaSeleccionada", this.getSemillaSeleccionada());
-		//ObservableUtils.forceFirePropertyChanged(this, "semillasSelect", this.getSemillasSelect());
+		ObservableUtils.forceFirePropertyChanged(partida.getJardinZen(), "semillasAcuaticas", partida.getJardinZen().getSemillasAcuaticas());
+		ObservableUtils.forceFirePropertyChanged(this, "semillasSelect", this.getSemillasSelect());
 		}
+	
+	public void borrarResultadoUltimaCompra(){
+		this.resultadoCompra = null;
+		
+	}
 							
 	/**
 	 * Getter y Setters
@@ -117,5 +127,12 @@ public class AdministradorJardinZen {
 		this.mejoraSeleccionada = mejoraSeleccionada;
 	}
 
+	public String getResultadoCompra() {
+		return resultadoCompra;
+	}
+
+	public void setResultadoCompra(String resultadoCompra) {
+		this.resultadoCompra = resultadoCompra;
+	}
 
 }
