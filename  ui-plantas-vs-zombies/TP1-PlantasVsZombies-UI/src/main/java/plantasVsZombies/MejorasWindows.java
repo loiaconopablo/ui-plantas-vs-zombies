@@ -85,15 +85,22 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 		Panel resultadoCompra = new Panel(mainPanel);
 		resultadoCompra.setLayout(new HorizontalLayout());
 
-		new Label(resultadoCompra).setText("Aca va a ir el resultado de la compra").setForeground(Color.BLACK);
-
+		new Label(resultadoCompra).setText("Haz Comprado una Mejora:").setForeground(Color.BLACK);
+		new Label(resultadoCompra).setWidth(150).bindValueToProperty("resultadoCompra");
+		
+		
 		Button comprar = new Button(resultadoCompra);
 		comprar.setCaption("Comprar");
 		comprar.onClick(new MessageSend(this.getModelObject(), "comprarMejora"));
+		
 
 		Button cerrar = new Button(resultadoCompra);
 		cerrar.setCaption("Cerrar");
-		cerrar.onClick(new MessageSend(this.getModelObject(), "irAlJardinZen"));
+		cerrar.onClick(new MessageSend(this.getModelObject(), "actualizarSemillas"));//Chequear estas dos cosas que no actuliza los valores de las semillas en el cuadro 
+		cerrar.onClick(new MessageSend(this.getModelObject(), "borrarResultadoUltimaCompra"));//Sigue Figurando la ultima compra.
+		cerrar.onClick(new MessageSend(this, "cancel"));
+			
+		
 	}
 		
 	private void createResultsGrid(Panel mainPanel) {
@@ -102,7 +109,6 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 		table.setWidth(450);
 
 		table.bindItemsToProperty("semillaSeleccionada.mejorasAplicadas");
-		//	 table.bindValueToProperty("semillaSeleccionada");
 
 		this.describeResultsGrid(table);
 	}

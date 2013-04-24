@@ -111,14 +111,16 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 			
 		Button plantar = new Button(mejorarPanel);
 		plantar.setCaption("Mejorar");
+		plantar.onClick(new MessageSend(this.getModelObject(), "borrarResultadoUltimaCompra"));
 		plantar.onClick(new MessageSend(this, "irAMejorarPlantas"));
 		
 		Panel botonesFinales = new Panel(mainPanel);
 		botonesFinales.setLayout(new HorizontalLayout());
 				
-		Button jugar = new Button(botonesFinales);
-		jugar.setCaption("Jugar");
-		jugar.onClick(new MessageSend(this.getModelObject(), "jugar"));
+		new Button(botonesFinales)
+			.setCaption("Aceptar")
+			.onClick(new MessageSend(this, "cancel"))
+			.setAsDefault();
 		
 		Button irAlOtroJardin = new Button(botonesFinales);
 		irAlOtroJardin.setCaption("Ir al Siguiente Jardin");
