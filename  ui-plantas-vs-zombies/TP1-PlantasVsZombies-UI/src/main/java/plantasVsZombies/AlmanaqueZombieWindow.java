@@ -3,10 +3,6 @@ package plantasVsZombies;
 import java.awt.Color;
 
 import org.uqbar.arena.actions.MessageSend;
-import org.uqbar.arena.aop.windows.TransactionalDialog;
-import org.uqbar.arena.bindings.NotNullObservable;
-import org.uqbar.arena.layout.ColumnLayout;
-import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -14,8 +10,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
-import org.uqbar.arena.windows.SimpleWindow;
-import org.uqbar.arena.windows.Window;
+import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import plantaszombies.Zombie;
@@ -24,7 +19,7 @@ import plantaszombies.Zombie;
  * @author Mariano Varela, Pablo Loiacono
  * 
  */
-public class AlmanaqueZombieWindow extends TransactionalDialog<AlmanaqueZombie> {
+public class AlmanaqueZombieWindow extends Dialog<AlmanaqueZombie> {
 
 	public AlmanaqueZombieWindow(WindowOwner parent) {
 		super(parent, new AlmanaqueZombie());

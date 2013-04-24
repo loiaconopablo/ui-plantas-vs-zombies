@@ -3,7 +3,6 @@ package plantasVsZombies;
 import java.awt.Color;
 
 import org.uqbar.arena.actions.MessageSend;
-import org.uqbar.arena.aop.windows.TransactionalDialog;
 import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
@@ -11,7 +10,6 @@ import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
@@ -19,20 +17,18 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import plantaszombies.Partida;
 import plantaszombies.Semilla;
-import plantaszombies.Zombie;
 
 /**
  * @author Mariano Varela, Pablo Loiacono
  * 
  */
 
-public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen> {
+public class JardinZenWindow extends Dialog<AdministradorJardinZen> {
+	private static final long serialVersionUID = 1L;
 
 	public JardinZenWindow(WindowOwner owner, Partida partida ) {
 		super(owner, new AdministradorJardinZen(partida));
-		this.getModelObject().borrarResultadoUltimaCompra();
-		this.getModelObject().actualizarSemillas();
-		
+//		this.getModelObject().borrarResultadoUltimaCompra();
 	}
 
 	
@@ -71,9 +67,6 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 		Panel panelInfo = new Panel(infoPanel);
 		panelInfo.setLayout(new VerticalLayout());
 		
-			new Label(panelEtiqueta).setText("Zombie").setForeground(Color.BLACK).setFontSize(12);
-			new Label(panelInfo).setWidth(150).bindValueToProperty("partida.zombieAtacante.nombre");
-		
 			new Label(panelEtiqueta).setText("Jardin Zen Seleccionado").setForeground(Color.RED).setFontSize(12);
 			new Label(panelInfo).bindValueToProperty("jardinSelect");	
 	
@@ -104,7 +97,7 @@ public class JardinZenWindow extends TransactionalDialog<AdministradorJardinZen>
 		defenseColumn.bindContentsToProperty("capacidadDefensiva");
 		
 		Column<Semilla> ataqueColumn = new Column<Semilla>(table);
-		ataqueColumn.setTitle("Puntos de Daño");
+		ataqueColumn.setTitle("Puntos de Danio");
 		ataqueColumn.setFixedSize(150);
 		ataqueColumn.bindContentsToProperty("puntosDeDanio");
 		

@@ -32,7 +32,7 @@ import plantaszombies.Zombie;
  * @author Mariano Varela, Pablo Loiacono
  * 
  */
-public class TableroWindow extends TransactionalDialog<Tablero> {
+public class TableroWindow extends Dialog<Tablero> {
 
 	public TableroWindow(WindowOwner parent, Tablero tablero) {
 		super(parent, tablero);
@@ -91,7 +91,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 
 		Button restart = new Button(actionsPanel);
 		restart.setCaption("Reiniciar");
-		restart.onClick(new MessageSend(this.getModelObject(), "jugar"));
+		restart.onClick(new MessageSend(this.getModelObject(), "reiniciar"));
 		
 		new Label(actionsPanel).setText("Recursos").setForeground(Color.BLACK).setFontSize(10);
 		new Label(actionsPanel).bindValueToProperty("jardin.recursos");
@@ -194,7 +194,7 @@ public class TableroWindow extends TransactionalDialog<Tablero> {
 		table.setHeigth(200);
 		table.setWidth(400);
 		
-		table.bindItemsToProperty("jardin.logs");
+		table.bindItemsToProperty("logs");
 		}
 
 	/**

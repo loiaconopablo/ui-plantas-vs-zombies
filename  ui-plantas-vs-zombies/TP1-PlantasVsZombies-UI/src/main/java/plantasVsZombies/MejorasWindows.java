@@ -3,38 +3,24 @@ package plantasVsZombies;
 import java.awt.Color;
 
 import org.uqbar.arena.actions.MessageSend;
-import org.uqbar.arena.aop.windows.TransactionalDialog;
-import org.uqbar.arena.bindings.ObservableProperty;
-import org.uqbar.arena.bindings.PropertyAdapter;
-
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.Selector;
-import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
-import org.uqbar.lacar.ui.model.ListBuilder;
-import org.uqbar.lacar.ui.model.bindings.Binding;
 
-import plantaszombies.Jardin;
 import plantaszombies.Mejora;
-import plantaszombies.Semilla;
-import plantaszombies.Planta;
-import plantaszombies.Semilla;
-import plantaszombies.Terreno;
-import plantaszombies.Zombie;
 
 /**
  * @author Mariano Varela, Pablo Loiacono
  * 
  */
-public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> {
+public class MejorasWindows extends Dialog<AdministradorJardinZen> {
 
 	public MejorasWindows(WindowOwner parent,
 			AdministradorJardinZen administradorJardinZen) {
@@ -43,7 +29,7 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 
 	protected void createMainTemplate(Panel mainPanel) {
 		this.setTitle("Aplicar Mejoras");
-		this.setTaskDescription("Aquí podras mejorar tus plantas!");
+		this.setTaskDescription("Aqui podras mejorar tus plantas!");
 		super.createMainTemplate(mainPanel);
 
 		Panel infoPanel = new Panel(mainPanel);
@@ -100,8 +86,6 @@ public class MejorasWindows extends TransactionalDialog<AdministradorJardinZen> 
 
 		Button cerrar = new Button(resultadoCompra);
 		cerrar.setCaption("Cerrar");
-		cerrar.onClick(new MessageSend(this.getModelObject(), "actualizarSemillas"));//Chequear estas dos cosas que no actuliza los valores de las semillas en el cuadro 
-		cerrar.onClick(new MessageSend(this.getModelObject(), "borrarResultadoUltimaCompra"));//Sigue Figurando la ultima compra.
 		cerrar.onClick(new MessageSend(this, "cancel"));
 			
 		
