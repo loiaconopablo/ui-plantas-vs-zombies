@@ -139,15 +139,15 @@ public class TableroWindow extends Dialog<Tablero> {
 		Panel panel = new Panel(panelDeSiembra);
 		panel.setLayout(new HorizontalLayout());
 
-		new Label(panel).setText("Planta:").setForeground(Color.GREEN);
+		new Label(panel).setText("Planta:").setForeground(Color.BLUE);
 		Selector<Semilla> selector = new Selector<Semilla>(panel) //
 				.allowNull(false);
 		selector.bindValueToProperty("semilla");
 
-		new Label(panel).setText("Fila:").setForeground(Color.GREEN);
+		new Label(panel).setText("Fila:").setForeground(Color.BLUE);
 		new TextBox(panel).bindValueToProperty("fila");
 
-		new Label(panel).setText("Columna:").setForeground(Color.GREEN);
+		new Label(panel).setText("Columna:").setForeground(Color.BLUE);
 		new TextBox(panel).bindValueToProperty("columna");
 		
 		Binding<ListBuilder<Semilla>> itemsBinding = selector.bindItemsToProperty("partida.jardinZen.semillas");
