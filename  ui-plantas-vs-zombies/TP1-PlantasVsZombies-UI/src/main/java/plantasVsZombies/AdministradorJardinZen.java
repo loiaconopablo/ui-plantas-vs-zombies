@@ -21,7 +21,7 @@ public class AdministradorJardinZen {
 	private Semilla semillaSeleccionada;
 	private JardinZen jardinZen;
 	private List<Semilla> semillasSelect;
-	private String jardinSelect = "Jardin Acuatico";
+	private String jardinSelect = "Jardin Terrestre";
 	private int espacioDisponible;
 	private Partida partida;
 	private Mejora mejoraSeleccionada;
