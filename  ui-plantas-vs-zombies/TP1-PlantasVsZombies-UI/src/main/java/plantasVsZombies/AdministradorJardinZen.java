@@ -30,13 +30,30 @@ public class AdministradorJardinZen {
 	public AdministradorJardinZen(Partida partida) {
 		this.partida = partida;
 		this.jardinZen = this.partida.getJardinZen();
-		this.semillasSelect = this.jardinZen.getSemillasAcuaticas();
+		this.semillasSelect = this.jardinZen.getSemillasTerrestres();
 		this.espacioDisponible = this.calcularEspacioDisponible();
 	}
 
 	/**
 	 * Acciones
 	 */
+	
+	public void buscar(String nombre){
+		if (this.jardinSelect.equals("Jardin Terrestre")){
+			this.setSemillasSelect(this.jardinZen.buscarEnTerrestre(nombre));
+		}
+		else {this.setSemillasSelect(this.jardinZen.buscarEnAcuatica(nombre));
+		}
+	}
+	
+	public void buscar(String nombre, String ordenadoPor){
+		if (this.jardinSelect.equals("Jardin Terrestre")){
+			this.setSemillasSelect(this.jardinZen.ordenarSemillasSelectPor(this.jardinZen.buscarEnTerrestre(nombre),ordenadoPor));
+		}	
+		else {
+				this.setSemillasSelect(this.jardinZen.ordenarSemillasSelectPor(this.jardinZen.buscarEnAcuatica(nombre),ordenadoPor));
+				}
+		}
 
 	public void irAlOtroJardin() {
 		if (this.jardinSelect.equals("Jardin Acuatico")) {
