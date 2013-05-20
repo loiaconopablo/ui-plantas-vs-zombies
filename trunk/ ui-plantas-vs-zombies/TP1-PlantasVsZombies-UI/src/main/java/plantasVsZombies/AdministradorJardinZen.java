@@ -38,25 +38,50 @@ public class AdministradorJardinZen {
 	 * Acciones
 	 */
 	
-	public void buscar(String nombre){
-		if (this.jardinSelect.equals("Jardin Terrestre")){
-			this.setSemillasSelect(this.jardinZen.buscarEnTerrestre(nombre));
+	/**
+	 * Busca y setea la semilla seleccionada
+	 */
+	public void buscarYSetearSemilla(String nombre) {
+		if (this.esTerrestre()) {
+			this.semillaSeleccionada = buscarSemilla(nombre, this.jardinZen.getSemillasTerrestres());
 		}
-		else {this.setSemillasSelect(this.jardinZen.buscarEnAcuatica(nombre));
+		else {
+			this.semillaSeleccionada = buscarSemilla(nombre, this.jardinZen.getSemillasAcuaticas());
 		}
 	}
-	
-	public void buscar(String nombre, String ordenadoPor){
-		if (this.jardinSelect.equals("Jardin Terrestre")){
-			this.setSemillasSelect(this.jardinZen.ordenarSemillasSelectPor(this.jardinZen.buscarEnTerrestre(nombre),ordenadoPor));
-		}	
-		else {
-				this.setSemillasSelect(this.jardinZen.ordenarSemillasSelectPor(this.jardinZen.buscarEnAcuatica(nombre),ordenadoPor));
-				}
+
+	public Semilla buscarSemilla(String nombre,List<Semilla> semillas){
+		Semilla resultado = null;
+		for (Semilla semilla : semillas) {
+			if ((nombre.equals(semilla.getNombre()))) {
+				resultado = semilla;
+			}
 		}
+		return resultado;
+	}
+	/**
+	 * Setea los resultados de la busqueda en la propiedad semillasSelect
+	 */
+	public void buscar(String nombre) {
+		if (this.esTerrestre()) {
+			this.setSemillasSelect(this.jardinZen.buscarEnTerrestre(nombre));
+		} else {
+			this.setSemillasSelect(this.jardinZen.buscarEnAcuatica(nombre));
+		}
+	}
+
+	public void buscar(String nombre, String ordenadoPor) {
+		if (this.esTerrestre()) {
+			this.setSemillasSelect(this.jardinZen.ordenarSemillasSelectPor(
+					this.jardinZen.buscarEnTerrestre(nombre), ordenadoPor));
+		} else {
+			this.setSemillasSelect(this.jardinZen.ordenarSemillasSelectPor(
+					this.jardinZen.buscarEnAcuatica(nombre), ordenadoPor));
+		}
+	}
 
 	public void irAlOtroJardin() {
-		if (this.jardinSelect.equals("Jardin Acuatico")) {
+		if (this.esAcuatico()) {
 			this.semillasSelect = jardinZen.getSemillasTerrestres();
 			this.jardinSelect = "Jardin Terrestre";
 		} else {
@@ -65,7 +90,6 @@ public class AdministradorJardinZen {
 		}
 		this.espacioDisponible = this.calcularEspacioDisponible();
 	}
-
 
 	public void comprarMejora() {
 		this.partida.getJardin().descontarRecursos(
@@ -80,7 +104,7 @@ public class AdministradorJardinZen {
 				this.partida.getJardin().getRecursos());
 
 	}
-	
+
 	protected int calcularEspacioDisponible() {
 		return 20 - this.semillasSelect.size();
 	}
@@ -88,6 +112,14 @@ public class AdministradorJardinZen {
 	public void borrarResultadoUltimaCompra() {
 		this.resultadoCompra = null;
 
+	}
+
+	public boolean esTerrestre() {
+		return this.jardinSelect.equals("Jardin Terrestre");
+	}
+
+	public boolean esAcuatico() {
+		return this.jardinSelect.equals("Jardin Acuatico");
 	}
 
 	/**
