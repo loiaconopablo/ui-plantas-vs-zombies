@@ -37,20 +37,21 @@ public class AdministradorJardinZen {
 	/**
 	 * Acciones
 	 */
-	
+
 	/**
 	 * Busca y setea la semilla seleccionada
 	 */
 	public void buscarYSetearSemilla(String nombre) {
 		if (this.esTerrestre()) {
-			this.semillaSeleccionada = buscarSemilla(nombre, this.jardinZen.getSemillasTerrestres());
-		}
-		else {
-			this.semillaSeleccionada = buscarSemilla(nombre, this.jardinZen.getSemillasAcuaticas());
+			this.semillaSeleccionada = buscarSemilla(nombre,
+					this.jardinZen.getSemillasTerrestres());
+		} else {
+			this.semillaSeleccionada = buscarSemilla(nombre,
+					this.jardinZen.getSemillasAcuaticas());
 		}
 	}
 
-	public Semilla buscarSemilla(String nombre,List<Semilla> semillas){
+	public Semilla buscarSemilla(String nombre, List<Semilla> semillas) {
 		Semilla resultado = null;
 		for (Semilla semilla : semillas) {
 			if ((nombre.equals(semilla.getNombre()))) {
@@ -59,6 +60,17 @@ public class AdministradorJardinZen {
 		}
 		return resultado;
 	}
+
+	public void buscarYSetearMejora(String mejoraSeleccionada) {
+		for (Mejora mejora : this.jardinZen.getMejorasPredefinidas()){
+			if (mejoraSeleccionada.equals(mejora.getNombre())){
+				this.setMejoraSeleccionada(mejora);
+				break;
+			}
+			
+		}
+	}
+
 	/**
 	 * Setea los resultados de la busqueda en la propiedad semillasSelect
 	 */
@@ -97,8 +109,8 @@ public class AdministradorJardinZen {
 		this.getSemillaSeleccionada().aplicarMejora(this.mejoraSeleccionada);
 		this.resultadoCompra = this.mejoraSeleccionada.getNombre();
 
-		ObservableUtils.forceFirePropertyChanged(this, "semillaSeleccionada",
-				this.getSemillaSeleccionada());
+		//ObservableUtils.forceFirePropertyChanged(this, "semillaSeleccionada",
+		//		this.getSemillaSeleccionada());
 
 		this.partida.getJardin().setRecursos(
 				this.partida.getJardin().getRecursos());
