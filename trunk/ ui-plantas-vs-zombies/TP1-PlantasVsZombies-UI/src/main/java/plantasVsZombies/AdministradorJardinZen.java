@@ -71,6 +71,18 @@ public class AdministradorJardinZen {
 		}
 	}
 
+	public Mejora buscarMejora(String mejoraSeleccionada) {
+		Mejora result = null;
+		for (Mejora mejora : this.jardinZen.getMejorasPredefinidas()){
+			if (mejoraSeleccionada.equals(mejora.getNombre())){
+				result = mejora; break;
+			}
+			
+		}
+		return result;
+	}
+	
+	
 	/**
 	 * Setea los resultados de la busqueda en la propiedad semillasSelect
 	 */
@@ -114,6 +126,7 @@ public class AdministradorJardinZen {
 
 		this.partida.getJardin().setRecursos(
 				this.partida.getJardin().getRecursos());
+		
 
 	}
 
