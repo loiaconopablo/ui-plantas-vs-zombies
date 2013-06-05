@@ -156,7 +156,7 @@ public class Tablero implements Serializable, Loggeable{
 	public void jugar(){
 		this.jardin = new Jardin(this.getFilasAcuaticas(),this.getFilasTerrestres());
 		this.partida = new Partida(this.getJardin(),new JardinZen(this.getJardin()));
-		this.actualizaGrilla();
+		//this.actualizaGrilla();
 	}
 	
 	public void reiniciar(){
