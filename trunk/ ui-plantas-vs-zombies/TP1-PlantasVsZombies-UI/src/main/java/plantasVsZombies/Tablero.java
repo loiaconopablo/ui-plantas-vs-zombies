@@ -44,6 +44,10 @@ public class Tablero implements Serializable, Loggeable{
 	/**
 	 * Accesors
 	 */
+	public List<Semilla> getSemillas(){
+		return this.getPartida().getJardinZen().getSemillas();
+	}
+	
 	public List<String> getLogs() {
 		return this.logs;
 	}
