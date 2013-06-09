@@ -37,7 +37,8 @@ public class Tablero implements Serializable, Loggeable{
 	private List<String> logs = new ArrayList<String>();
 	
 	public Tablero(){
-		
+		//this.jardin = new Jardin(2,2);
+		//this.jardin.getFilas().get(0).aniadirEn(new Semilla(null, "nombre", 50, 50),0, jardin);
 	}
 	
 	/**
