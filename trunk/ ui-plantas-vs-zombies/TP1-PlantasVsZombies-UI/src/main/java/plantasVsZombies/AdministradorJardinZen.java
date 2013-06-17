@@ -18,6 +18,7 @@ import plantaszombies.Semilla;
 @Observable
 public class AdministradorJardinZen {
 
+	private String nombreAbuscar;
 	private Semilla semillaSeleccionada;
 	private JardinZen jardinZen;
 	private List<Semilla> semillasSelect;
@@ -129,6 +130,18 @@ public class AdministradorJardinZen {
 		
 
 	}
+	
+	/**
+	 * Modificados para Wicket
+	 * 
+	 */
+	public void buscarWicket(){
+		this.buscar(this.nombreAbuscar);
+		}
+
+	public void buscarWicket(String nombre, String ordenadoPor) {
+			this.buscar(this.nombreAbuscar, "");
+	}
 
 	protected int calcularEspacioDisponible() {
 		return 20 - this.semillasSelect.size();
@@ -147,6 +160,10 @@ public class AdministradorJardinZen {
 		return this.jardinSelect.equals("Jardin Acuatico");
 	}
 
+	public void limpiarBusqueda() {
+		this.nombreAbuscar = "";
+		this.buscarWicket();
+		}
 	/**
 	 * Getter y Setters
 	 */
@@ -214,5 +231,14 @@ public class AdministradorJardinZen {
 	public void setResultadoCompra(String resultadoCompra) {
 		this.resultadoCompra = resultadoCompra;
 	}
+
+	public String getNombreAbuscar() {
+		return nombreAbuscar;
+	}
+
+	public void setNombreAbuscar(String nombreAbuscar) {
+		this.nombreAbuscar = nombreAbuscar;
+	}
+
 
 }
