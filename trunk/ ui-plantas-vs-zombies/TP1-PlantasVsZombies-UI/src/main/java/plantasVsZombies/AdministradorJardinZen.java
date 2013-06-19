@@ -239,6 +239,10 @@ public class AdministradorJardinZen {
 	public void setNombreAbuscar(String nombreAbuscar) {
 		this.nombreAbuscar = nombreAbuscar;
 	}
+	
+	public int getRecursos(){
+		return this.partida.getJardin().getRecursos();
+	}
 
 
 }
