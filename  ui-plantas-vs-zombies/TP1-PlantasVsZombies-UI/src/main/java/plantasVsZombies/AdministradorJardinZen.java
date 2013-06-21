@@ -139,8 +139,8 @@ public class AdministradorJardinZen {
 		this.buscar(this.nombreAbuscar);
 		}
 
-	public void buscarWicket(String nombre, String ordenadoPor) {
-			this.buscar(this.nombreAbuscar, "");
+	public void buscarWicketOrdenadorPor(String ordenadoPor) {
+			this.buscar(this.nombreAbuscar, ordenadoPor);
 	}
 
 	protected int calcularEspacioDisponible() {
