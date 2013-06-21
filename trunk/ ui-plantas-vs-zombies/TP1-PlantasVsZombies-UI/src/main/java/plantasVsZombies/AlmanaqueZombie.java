@@ -44,10 +44,20 @@ public class AlmanaqueZombie {
 	
 	public String nombreZombieSeleccionado(){
 		if (this.zombieSeleccionado == null)			
-			return "No hay seleccionado zombies, esto igual no deberia de aparecer al iniciar y al elegir un zombie deberia de funcionar";
+			return "No hay seleccionado ningun zombie, seleccione uno.";
 		else
 			return this.zombieSeleccionado.getNombre();
 	}
+	
+	public int ataqueZombieSeleccionado(){
+		if (this.zombieSeleccionado == null)			
+			return 0;
+		else
+			return this.zombieSeleccionado.getAtaque();
+	}
+		
+
+	
 	
 	/**
 	 * Acciones
