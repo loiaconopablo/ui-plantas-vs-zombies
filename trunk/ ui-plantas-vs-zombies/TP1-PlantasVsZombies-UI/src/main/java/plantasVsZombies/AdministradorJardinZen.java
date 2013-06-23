@@ -244,5 +244,7 @@ public class AdministradorJardinZen {
 		return this.partida.getJardin().getRecursos();
 	}
 
-
+	public List<Mejora> getMejorasPredefinidas(){
+		return this.jardinZen.getMejorasPredefinidas();
+	}
 }
