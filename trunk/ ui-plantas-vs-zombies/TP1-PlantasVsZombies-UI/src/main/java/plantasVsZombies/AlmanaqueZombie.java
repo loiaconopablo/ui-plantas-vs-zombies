@@ -44,7 +44,7 @@ public class AlmanaqueZombie {
 	
 	public String nombreZombieSeleccionado(){
 		if (this.zombieSeleccionado == null)			
-			return "No hay seleccionado ningun zombie, seleccione uno.";
+			return "No hay seleccionado ningun zombie, eliga uno.";
 		else
 			return this.zombieSeleccionado.getNombre();
 	}
