@@ -19,7 +19,7 @@ import plantaszombies.Semilla;
 public class AdministradorJardinZen {
 
 	private String nombreAbuscar;
-	private Semilla semillaSeleccionada;
+	public Semilla semillaSeleccionada;
 	private JardinZen jardinZen;
 	private List<Semilla> semillasSelect;
 	private String jardinSelect = "Jardin Terrestre";
@@ -125,10 +125,8 @@ public class AdministradorJardinZen {
 		//ObservableUtils.forceFirePropertyChanged(this, "semillaSeleccionada",
 		//		this.getSemillaSeleccionada());
 
-		this.partida.getJardin().setRecursos(
-				this.partida.getJardin().getRecursos());
+		this.partida.getJardin().setRecursos(this.partida.getJardin().getRecursos());
 		
-
 	}
 	
 	/**
@@ -247,4 +245,8 @@ public class AdministradorJardinZen {
 	public List<Mejora> getMejorasPredefinidas(){
 		return this.jardinZen.getMejorasPredefinidas();
 	}
-}
+
+	public String getNombreSemillaSeleccionada(){
+		return this.semillaSeleccionada.getNombre();
+	}}
+
