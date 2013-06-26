@@ -153,6 +153,14 @@ public class Tablero implements Serializable, Loggeable{
 		this.partida = partida;
 	}
 	
+	//Para Wicket!!!
+	public List<Terreno> getTerrenosAcuaticos(){
+		return this.jardin.getTerrenosAcuaticos();
+	}
+	
+	public List<Terreno> getTerrenosTerrestres(){
+		return this.jardin.getTerrenosTerrestres();
+	}
 	/**
 	 * Acciones
 	 */
@@ -174,11 +182,28 @@ public class Tablero implements Serializable, Loggeable{
 		this.getJardin().plantar(this.getFila(),this.getColumna(), this.getSemilla());
 		this.actualizarLog("Sembraste "+ this.getSemilla().getNombre()+ " en casillero " + this.getColumna());
 	}
+	// ParaWicket
+	public void plantarWicket(){
+		this.getJardin().plantarWicket(this.getFila(),this.getColumna(), this.getSemilla());
+		this.actualizarLog("Sembraste "+ this.getSemilla().getNombre()+ " en casillero " + this.getColumna());
+	}
 	
 	public void atacar(){
 		this.partida.setZombieAtacante(this.getZombieAtacante());
 		this.quitarZombieDeLaLista(this.getZombieAtacante());
 		this.partida.setTerrenoAAtacar(this.jardin.getFilas().get(this.filaAAtacar));
+		this.partida.atacar(this);
+		//this.actualizaGrilla();
+		//ObservableUtils.forceFirePropertyChanged(this, "almanaque", this.getAlmanaque());		
+	}
+	// ATACAR Para Wicket
+	public void atacarWicket(){
+		this.partida.setZombieAtacante(this.getZombieAtacante());
+		this.quitarZombieDeLaLista(this.getZombieAtacante());
+		if (this.filaAAtacar < this.filasTerrestres){
+			this.partida.setTerrenoAAtacar(this.jardin.getTerrenosTerrestres().get(this.filaAAtacar));}
+		else{ 
+			this.partida.setTerrenoAAtacar(this.jardin.getTerrenosAcuaticos().get(this.filaAAtacar-this.filasTerrestres));}
 		this.partida.atacar(this);
 		//this.actualizaGrilla();
 		//ObservableUtils.forceFirePropertyChanged(this, "almanaque", this.getAlmanaque());		
