@@ -205,8 +205,6 @@ public class Tablero implements Serializable, Loggeable{
 		else{ 
 			this.partida.setTerrenoAAtacar(this.jardin.getTerrenosAcuaticos().get(this.filaAAtacar-this.filasTerrestres));}
 		this.partida.atacar(this);
-		//this.actualizaGrilla();
-		//ObservableUtils.forceFirePropertyChanged(this, "almanaque", this.getAlmanaque());		
 	}
 
 	private void quitarZombieDeLaLista(Zombie zombie) {
